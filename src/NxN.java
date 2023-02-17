@@ -13,11 +13,27 @@ public class NxN {
 
         nxn[x][y] = new Cell(value);
     }
+    public void add(int index, int value) {
+
+        int zeile = index / 9;
+        int spalte = index % 9;
+
+        nxn[spalte][zeile] = new Cell(value);
+    }
 
     public void rawprint() {
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 System.out.println(nxn[x][y].getValue());
+            }
+            System.out.println();
+        }
+    }
+
+    public void rawprint2() {
+        for (Cell[] cellList : nxn) {
+            for (Cell cell : cellList) {
+                System.out.println(cell.getValue());
             }
             System.out.println();
         }
@@ -36,26 +52,24 @@ public class NxN {
 
             //System.out.println("☐");
 
-            if (nrKM == 3) {
+            if (nrKM == 1) {
 
                 System.out.println(" ");
 
                 zeile ++;
 
-                if (zeile >= 3) {
+                if (zeile >= 9) {
                     zeile = 0;
                     runZahler ++;
                     System.out.println("  ----------------------------");
+                    break;
                 }
 
                 nrKM = 0;
 
-                index = (runZahler * 3);
             }
 
-            if (runZahler == 3) {
-                break;
-            }
+
 
             for (int n = 0; n < 9; n++) {
 

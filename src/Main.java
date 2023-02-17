@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,6 +14,10 @@ public class Main {
     static int[] Matrix7 = {7, 9, 6, 1, 8, 4, 5, 3, 2};
     static int[] Matrix8 = {2, 5, 3, 7, 9, 6, 1, 4, 8};
     static int[] Matrix9 = {8, 4, 1, 3, 2, 5, 6, 7, 9};
+
+    static ArrayList<Integer> NatrixFull = new ArrayList<>();
+
+
 
 
 /*
@@ -37,12 +42,23 @@ public class Main {
     public static void main(String[] args) {
 
         //replaceRandom();
+        for (int i = 0; i < 9; i++) {
+            NatrixFull.add(Matrix1[i]);
+            NatrixFull.add(Matrix2[i]);
+            NatrixFull.add(Matrix3[i]);
+            NatrixFull.add(Matrix4[i]);
+            NatrixFull.add(Matrix5[i]);
+            NatrixFull.add(Matrix6[i]);
+            NatrixFull.add(Matrix7[i]);
+            NatrixFull.add(Matrix8[i]);
+            NatrixFull.add(Matrix9[i]);
+        }
 
-        NxN nxnMatrix = initNxN();
+        NxN nxnMatrix = initNxN2();
 
         printSudoku();
-       // nxnMatrix.print();
-        nxnMatrix.rawprint();
+        nxnMatrix.print();
+        nxnMatrix.rawprint2();
 
         benutzerinteraktion();
 
@@ -73,6 +89,18 @@ public class Main {
             }
             y++;
 
+        }
+
+        return nxn;
+    }
+
+    private static NxN initNxN2() {
+        NxN nxn = new NxN();
+        int x = 0;
+        int y = 0;
+
+        for (int i = 0;i < NatrixFull.size(); i++) {
+            nxn.add(i , NatrixFull.get(i));
         }
 
         return nxn;
