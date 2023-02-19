@@ -1,9 +1,8 @@
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+
 
     static int[] Matrix1 = {2, 5, 9, 8, 7, 1, 6, 4, 3};
     static int[] Matrix2 = {3, 1, 4, 6, 2, 9, 5, 8, 7};
@@ -40,6 +39,73 @@ public class Main {
     static ArrayList<Integer> matrixIndexFalsch = new ArrayList<>();
 
     public static void main(String[] args) {
+
+        ArrayList<Cell> row1 = new ArrayList<>(){{
+            add(new Cell(1));
+            add(new Cell(2));
+            add(new Cell(3));
+        }};
+
+        ArrayList<Cell> row2 = new ArrayList<>(){{
+            add(new Cell(4));
+            add(new Cell(5));
+            add(new Cell(6));
+        }};
+
+        ArrayList<Cell> row3 = new ArrayList<>(){{
+            add(new Cell(7));
+            add(new Cell(8));
+            add(new Cell(9));
+        }};
+
+
+        Matrix matrix = new Matrix();
+        matrix.add(row3);
+        matrix.add(row2);
+        matrix.add(row1);
+
+
+        System.out.println();
+
+        Matrix m2 = new Matrix();
+        m2.add(new ArrayList<>(){{
+            add(new Cell(1));
+            add(new Cell(2));
+            add(new Cell(3));
+        }});
+        m2.add(new ArrayList<>(){{
+            add(new Cell(4));
+            add(new Cell(5));
+            add(new Cell(6));
+        }});
+        m2.add(new ArrayList<>(){{
+            add(new Cell(7));
+            add(new Cell(8));
+            add(new Cell(9));
+        }});
+
+        // Build the board with the sub matrices
+        SudokuBoard board = new SudokuBoard();
+        board.add(m2);
+        board.add(m2);
+        board.add(m2);
+        board.add(matrix);
+        board.add(m2);
+        board.add(m2);
+        board.add(m2);
+        board.add(m2);
+        board.add(m2);
+
+        board.print();
+
+        board.printSubMatrix(3);
+
+        Matrix subMatrix3 = board.get(3);
+
+        Cell cell1_1 = subMatrix3.getCell(1,1);
+
+        System.out.println("\nCell 1,1: " + cell1_1.getValue() + " - is changeable? " + cell1_1.isChangeable() + '\n');
+
 
         //replaceRandom();
         for (int i = 0; i < 9; i++) {
@@ -84,9 +150,8 @@ public class Main {
 
             }
 
-            if (x == 9) {
-                x = 0;
-            }
+            x = 0;
+
             y++;
 
         }
@@ -119,15 +184,15 @@ public class Main {
     };
 
     public static void replaceRandom() {
+        int anzahlReplaceVon = 2; // Wie viele Zahlen in einer Matrix sollen minimal ersetzt werden
+        int anzahlReplaceBis = 7; // Wie viele Zahlen in einer Matrix sollen maximal ersetzt werden
+        int randomNum = (int)Math.floor(Math.random()*(anzahlReplaceBis-anzahlReplaceVon+1)+anzahlReplaceVon);
+
         for (dxdMatrix dxdMatrix : kM) {
-            int anzahlReplaceVon = 2; // Wie viele Zahlen in einer Matrix sollen minimal ersetzt werden
-            int anzahlReplaceBis = 7; // Wie viele Zahlen in einer Matrix sollen maximal ersetzt werden
-            int int_random = (int)Math.floor(Math.random()*(anzahlReplaceBis-anzahlReplaceVon+1)+anzahlReplaceVon);
-
-            for (int i = 0; i < int_random; i++) {
+            for (int i = 0; i < randomNum; i++) {
                 dxdMatrix.setZelle((int)Math.floor(Math.random()*(2 +1)+0), (int)Math.floor(Math.random()*(2 +1)+0), 0);
-            }
 
+            }
         }
 
     }
@@ -217,40 +282,21 @@ public class Main {
 
             if (input.length() > 1) {
                 System.out.println("Nur einen Buchstaben eingeben");
-            } else {
-
-                switch (input) {
-                    case "A":
-                        xWertGlobal = 1;
-                        break;
-                    case "B":
-                        xWertGlobal = 2;
-                        break;
-                    case "C":
-                        xWertGlobal = 3;
-                        break;
-                    case "D":
-                        xWertGlobal = 4;
-                        break;
-                    case "E":
-                        xWertGlobal = 5;
-                        break;
-                    case "F":
-                        xWertGlobal = 6;
-                        break;
-                    case "G":
-                        xWertGlobal = 7;
-                        break;
-                    case "H":
-                        xWertGlobal = 8;
-                        break;
-                    case "I":
-                        xWertGlobal = 9;
-                        break;
-                    default:
-                        System.out.println("Nur einen Großbuchstaben von A - I eingeben");
-                }
             }
+
+            switch (input) {
+                case "A" -> xWertGlobal = 1;
+                case "B" -> xWertGlobal = 2;
+                case "C" -> xWertGlobal = 3;
+                case "D" -> xWertGlobal = 4;
+                case "E" -> xWertGlobal = 5;
+                case "F" -> xWertGlobal = 6;
+                case "G" -> xWertGlobal = 7;
+                case "H" -> xWertGlobal = 8;
+                case "I" -> xWertGlobal = 9;
+                default -> System.out.println("Nur einen Großbuchstaben von A - I eingeben");
+            }
+
 
         }
 
@@ -313,41 +359,42 @@ public class Main {
         // Switch mit case für jede Matrix, welche die zu trimmende Menge an der x und y Koordinate enthält
 
         switch (matrixIndex) {
-            case 1:
+            case 1 -> {
                 xWertLokal = xWertGlobal;
                 yWertLokal = yWertGlobal;
-                break;
-            case 2:
+            }
+            case 2 -> {
                 xWertLokal = xWertGlobal - 3;
                 yWertLokal = yWertGlobal;
-                break;
-            case 3:
+            }
+            case 3 -> {
                 xWertLokal = xWertGlobal - 6;
                 yWertLokal = yWertGlobal;
-                break;
-            case 4:
+            }
+            case 4 -> {
                 xWertLokal = xWertGlobal;
                 yWertLokal = yWertGlobal - 3;
-                break;
-            case 7:
+            }
+            case 7 -> {
                 xWertLokal = xWertGlobal;
                 yWertLokal = yWertGlobal - 6;
-                break;
-            case 5:
+            }
+            case 5 -> {
                 xWertLokal = xWertGlobal - 3;
                 yWertLokal = yWertGlobal - 3;
-                break;
-            case 6:
+            }
+            case 6 -> {
                 xWertLokal = xWertGlobal - 6;
                 yWertLokal = yWertGlobal - 3;
-                break;
-            case 8:
+            }
+            case 8 -> {
                 xWertLokal = xWertGlobal - 3;
                 yWertLokal = yWertGlobal - 6;
-                break;
-            case 9:
+            }
+            case 9 -> {
                 xWertLokal = xWertGlobal - 6;
                 yWertLokal = yWertGlobal - 6;
+            }
         }
 
         System.out.println("Die lokalen Koordinaten der Auswahl sind x = " + xWertLokal + " und y = " + yWertLokal);
@@ -423,60 +470,60 @@ public class Main {
         int[] yprufen = new int[2];
 
         switch (matrixIndex) {
-            case 1:
+            case 1 -> {
                 xprufen[0] = 2;
                 xprufen[1] = 3;
                 yprufen[0] = 4;
                 yprufen[1] = 7;
-                break;
-            case 2:
+            }
+            case 2 -> {
                 xprufen[0] = 1;
                 xprufen[1] = 3;
                 yprufen[0] = 5;
                 yprufen[1] = 8;
-                break;
-            case 3:
+            }
+            case 3 -> {
                 xprufen[0] = 2;
                 xprufen[1] = 1;
                 yprufen[0] = 6;
                 yprufen[1] = 9;
-                break;
-            case 4:
+            }
+            case 4 -> {
                 xprufen[0] = 5;
                 xprufen[1] = 6;
                 yprufen[0] = 1;
                 yprufen[1] = 7;
-                break;
-            case 5:
+            }
+            case 5 -> {
                 xprufen[0] = 4;
                 xprufen[1] = 6;
                 yprufen[0] = 2;
                 yprufen[1] = 8;
-                break;
-            case 6:
+            }
+            case 6 -> {
                 xprufen[0] = 4;
                 xprufen[1] = 5;
                 yprufen[0] = 3;
                 yprufen[1] = 9;
-                break;
-            case 7:
+            }
+            case 7 -> {
                 xprufen[0] = 8;
                 xprufen[1] = 9;
                 yprufen[0] = 1;
                 yprufen[1] = 4;
-                break;
-            case 8:
+            }
+            case 8 -> {
                 xprufen[0] = 7;
                 xprufen[1] = 9;
                 yprufen[0] = 2;
                 yprufen[1] = 5;
-                break;
-            case 9:
+            }
+            case 9 -> {
                 xprufen[0] = 7;
                 xprufen[1] = 8;
                 yprufen[0] = 3;
                 yprufen[1] = 6;
-                break;
+            }
         }
 
         // Zuerst die x-Achse überprüfen
