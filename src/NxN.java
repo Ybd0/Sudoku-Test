@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-
-                        //x         y
+//x         y
 public class NxN {
 
     private final Cell[][] nxn = new Cell[9][9];
@@ -85,7 +83,7 @@ public class NxN {
                  */
 
 
-                if (nxn[n][zeile].isChangable()) {
+                if (nxn[n][zeile].isChangeable()) {
                     // todo
                     //System.out.print("?");
                     System.out.print((char) 27 + "[34m?");
