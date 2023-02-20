@@ -1,7 +1,9 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
+
 
 
     static int[] Matrix1 = {2, 5, 9, 8, 7, 1, 6, 4, 3};
@@ -14,10 +16,11 @@ public class Main {
     static int[] Matrix8 = {2, 5, 3, 7, 9, 6, 1, 4, 8};
     static int[] Matrix9 = {8, 4, 1, 3, 2, 5, 6, 7, 9};
 
+    static ArrayList<int[]> allMatrices = new ArrayList<>();
+
+
+
     static ArrayList<Integer> NatrixFull = new ArrayList<>();
-
-
-
 
 /*
 
@@ -31,81 +34,211 @@ public class Main {
     static int[] Matrix8 = {64, 65, 66, 67, 68, 69, 70, 71, 72};
     static int[] Matrix9 = {73, 74, 75, 76, 77, 78, 79, 80, 81};
 
+
  */
-
-    static ArrayList<Integer> xGlobalFalsch = new ArrayList<>();
-    static ArrayList<Integer> yGlobalFalsch = new ArrayList<>();
-
-    static ArrayList<Integer> matrixIndexFalsch = new ArrayList<>();
+    static ArrayList<String> xyGlobalFlasch = new ArrayList<>();
 
     public static void main(String[] args) {
 
-        ArrayList<Cell> row1 = new ArrayList<>(){{
-            add(new Cell(1));
-            add(new Cell(2));
-            add(new Cell(3));
-        }};
-
-        ArrayList<Cell> row2 = new ArrayList<>(){{
-            add(new Cell(4));
-            add(new Cell(5));
-            add(new Cell(6));
-        }};
-
-        ArrayList<Cell> row3 = new ArrayList<>(){{
-            add(new Cell(7));
-            add(new Cell(8));
-            add(new Cell(9));
-        }};
-
-
-        Matrix matrix = new Matrix();
-        matrix.add(row3);
-        matrix.add(row2);
-        matrix.add(row1);
-
-
         System.out.println();
 
+        Matrix m1 = new Matrix();
+
         Matrix m2 = new Matrix();
+
+        Matrix m3 = new Matrix();
+
+        Matrix m4 = new Matrix();
+
+        Matrix m5 = new Matrix();
+
+        Matrix m6 = new Matrix();
+
+        Matrix m7 = new Matrix();
+
+        Matrix m8 = new Matrix();
+
+        Matrix m9 = new Matrix();
+
+        // must replace random numbers in arrays before they are being added
+
+        allMatrices.add(Matrix1);
+        allMatrices.add(Matrix2);
+        allMatrices.add(Matrix3);
+        allMatrices.add(Matrix4);
+        allMatrices.add(Matrix5);
+        allMatrices.add(Matrix6);
+        allMatrices.add(Matrix7);
+        allMatrices.add(Matrix8);
+        allMatrices.add(Matrix9);
+
+        int anzahlReplaceVon = 2; // Wie viele Zahlen in einer Matrix sollen minimal ersetzt werden / Min. amount of numbers in a sub matrix to be replaced
+        int anzahlReplaceBis = 7; // Wie viele Zahlen in einer Matrix sollen maximal ersetzt werden / Max. amount of numbers in a sub matrix to be replaced
+
+        for (int i = 0; i < 9; i++) {
+
+            int randomNum = (int)Math.floor(Math.random()*(anzahlReplaceBis-anzahlReplaceVon+1)+anzahlReplaceVon);
+
+            for (int o = 0; o < randomNum; o++) {
+                int randomIndex = (int)Math.floor(Math.random()*(8 +1)+0);
+                allMatrices.get(i)[randomIndex] = 0;
+            }
+        }
+
+        m1.add(new ArrayList<>(){{
+            add(new Cell(Matrix1[0]));
+            add(new Cell(Matrix1[1]));
+            add(new Cell(Matrix1[2]));
+        }});
+        m1.add(new ArrayList<>(){{
+            add(new Cell(Matrix1[3]));
+            add(new Cell(Matrix1[4]));
+            add(new Cell(Matrix1[5]));
+        }});
+        m1.add(new ArrayList<>(){{
+            add(new Cell(Matrix1[6]));
+            add(new Cell(Matrix1[7]));
+            add(new Cell(Matrix1[8]));
+        }});
+
         m2.add(new ArrayList<>(){{
-            add(new Cell(1));
-            add(new Cell(2));
-            add(new Cell(3));
+            add(new Cell(Matrix2[0]));
+            add(new Cell(Matrix2[1]));
+            add(new Cell(Matrix2[2]));
         }});
         m2.add(new ArrayList<>(){{
-            add(new Cell(4));
-            add(new Cell(5));
-            add(new Cell(6));
+            add(new Cell(Matrix2[3]));
+            add(new Cell(Matrix2[4]));
+            add(new Cell(Matrix2[5]));
         }});
         m2.add(new ArrayList<>(){{
-            add(new Cell(7));
-            add(new Cell(8));
-            add(new Cell(9));
+            add(new Cell(Matrix2[6]));
+            add(new Cell(Matrix2[7]));
+            add(new Cell(Matrix2[8]));
         }});
+
+        m3.add(new ArrayList<>(){{
+            add(new Cell(Matrix3[0]));
+            add(new Cell(Matrix3[1]));
+            add(new Cell(Matrix3[2]));
+        }});
+        m3.add(new ArrayList<>(){{
+            add(new Cell(Matrix3[3]));
+            add(new Cell(Matrix3[4]));
+            add(new Cell(Matrix3[5]));
+        }});
+        m3.add(new ArrayList<>(){{
+            add(new Cell(Matrix3[6]));
+            add(new Cell(Matrix3[7]));
+            add(new Cell(Matrix3[8]));
+        }});
+
+        m4.add(new ArrayList<>(){{
+            add(new Cell(Matrix4[0]));
+            add(new Cell(Matrix4[1]));
+            add(new Cell(Matrix4[2]));
+        }});
+        m4.add(new ArrayList<>(){{
+            add(new Cell(Matrix4[3]));
+            add(new Cell(Matrix4[4]));
+            add(new Cell(Matrix4[5]));
+        }});
+        m4.add(new ArrayList<>(){{
+            add(new Cell(Matrix4[6]));
+            add(new Cell(Matrix4[7]));
+            add(new Cell(Matrix4[8]));
+        }});
+
+        m5.add(new ArrayList<>(){{
+            add(new Cell(Matrix5[0]));
+            add(new Cell(Matrix5[1]));
+            add(new Cell(Matrix5[2]));
+        }});
+        m5.add(new ArrayList<>(){{
+            add(new Cell(Matrix5[3]));
+            add(new Cell(Matrix5[4]));
+            add(new Cell(Matrix5[5]));
+        }});
+        m5.add(new ArrayList<>(){{
+            add(new Cell(Matrix5[6]));
+            add(new Cell(Matrix5[7]));
+            add(new Cell(Matrix5[8]));
+        }});
+
+        m6.add(new ArrayList<>(){{
+            add(new Cell(Matrix6[0]));
+            add(new Cell(Matrix6[1]));
+            add(new Cell(Matrix6[2]));
+        }});
+        m6.add(new ArrayList<>(){{
+            add(new Cell(Matrix6[3]));
+            add(new Cell(Matrix6[4]));
+            add(new Cell(Matrix6[5]));
+        }});
+        m6.add(new ArrayList<>(){{
+            add(new Cell(Matrix6[6]));
+            add(new Cell(Matrix6[7]));
+            add(new Cell(Matrix6[8]));
+        }});
+
+        m7.add(new ArrayList<>(){{
+            add(new Cell(Matrix7[0]));
+            add(new Cell(Matrix7[1]));
+            add(new Cell(Matrix7[2]));
+        }});
+        m7.add(new ArrayList<>(){{
+            add(new Cell(Matrix7[3]));
+            add(new Cell(Matrix7[4]));
+            add(new Cell(Matrix7[5]));
+        }});
+        m7.add(new ArrayList<>(){{
+            add(new Cell(Matrix7[6]));
+            add(new Cell(Matrix7[7]));
+            add(new Cell(Matrix7[8]));
+        }});
+        m8.add(new ArrayList<>(){{
+            add(new Cell(Matrix8[0]));
+            add(new Cell(Matrix8[1]));
+            add(new Cell(Matrix8[2]));
+        }});
+        m8.add(new ArrayList<>(){{
+            add(new Cell(Matrix8[3]));
+            add(new Cell(Matrix8[4]));
+            add(new Cell(Matrix8[5]));
+        }});
+        m8.add(new ArrayList<>(){{
+            add(new Cell(Matrix8[6]));
+            add(new Cell(Matrix8[7]));
+            add(new Cell(Matrix8[8]));
+        }});
+        m9.add(new ArrayList<>(){{
+            add(new Cell(Matrix9[0]));
+            add(new Cell(Matrix9[1]));
+            add(new Cell(Matrix9[2]));
+        }});
+        m9.add(new ArrayList<>(){{
+            add(new Cell(Matrix9[3]));
+            add(new Cell(Matrix9[4]));
+            add(new Cell(Matrix9[5]));
+        }});
+        m9.add(new ArrayList<>(){{
+            add(new Cell(Matrix9[6]));
+            add(new Cell(Matrix9[7]));
+            add(new Cell(Matrix9[8]));
+        }});
+
 
         // Build the board with the sub matrices
-        SudokuBoard board = new SudokuBoard();
+        SudokuBoard board = SudokuBoard.getInstance();
+        board.add(m1);
         board.add(m2);
-        board.add(m2);
-        board.add(m2);
-        board.add(matrix);
-        board.add(m2);
-        board.add(m2);
-        board.add(m2);
-        board.add(m2);
-        board.add(m2);
-
-        board.print();
-
-        board.printSubMatrix(3);
-
-        Matrix subMatrix3 = board.get(3);
-
-        Cell cell1_1 = subMatrix3.getCell(1,1);
-
-        System.out.println("\nCell 1,1: " + cell1_1.getValue() + " - is changeable? " + cell1_1.isChangeable() + '\n');
-
+        board.add(m3);
+        board.add(m4);
+        board.add(m5);
+        board.add(m6);
+        board.add(m7);
+        board.add(m8);
+        board.add(m9);
 
         //replaceRandom();
         for (int i = 0; i < 9; i++) {
@@ -120,72 +253,29 @@ public class Main {
             NatrixFull.add(Matrix9[i]);
         }
 
-        NxN nxnMatrix = initNxN2();
+        kM = new dxdMatrix[] {
+                new dxdMatrix(Matrix1),
+                new dxdMatrix(Matrix2),
+                new dxdMatrix(Matrix3),
+                new dxdMatrix(Matrix4),
+                new dxdMatrix(Matrix5),
+                new dxdMatrix(Matrix6),
+                new dxdMatrix(Matrix7),
+                new dxdMatrix(Matrix8),
+                new dxdMatrix(Matrix9)
+        };
 
         printSudoku();
-        nxnMatrix.print();
-        nxnMatrix.rawprint2();
 
         benutzerinteraktion();
 
     }
 
-    private static NxN initNxN() {
-        NxN nxn = new NxN();
+    public static dxdMatrix[] kM = new dxdMatrix[9];
 
-        int x = 0;
-
-        int y = 0;
-
-        for (dxdMatrix dm : kM) {
-            for (int i = 0; i < 3; i++) {
-                for (int n = 0; n < 3; n++) {
-
-                    int value = dm.getZelle(i, n);
-
-                    nxn.add(x, y, value);
-                    x++;
-
-                }
-
-            }
-
-            x = 0;
-
-            y++;
-
-        }
-
-        return nxn;
-    }
-
-    private static NxN initNxN2() {
-        NxN nxn = new NxN();
-        int x = 0;
-        int y = 0;
-
-        for (int i = 0;i < NatrixFull.size(); i++) {
-            nxn.add(i , NatrixFull.get(i));
-        }
-
-        return nxn;
-    }
-
-    public static final dxdMatrix[] kM = new dxdMatrix[] {
-            new dxdMatrix(Matrix1),
-            new dxdMatrix(Matrix2),
-            new dxdMatrix(Matrix3),
-            new dxdMatrix(Matrix4),
-            new dxdMatrix(Matrix5),
-            new dxdMatrix(Matrix6),
-            new dxdMatrix(Matrix7),
-            new dxdMatrix(Matrix8),
-            new dxdMatrix(Matrix9)
-    };
-
-    public static void replaceRandom() {
-        int anzahlReplaceVon = 2; // Wie viele Zahlen in einer Matrix sollen minimal ersetzt werden
-        int anzahlReplaceBis = 7; // Wie viele Zahlen in einer Matrix sollen maximal ersetzt werden
+    public void replaceRandom() {
+        int anzahlReplaceVon = 2; // Wie viele Zahlen in einer Matrix sollen minimal ersetzt werden / Min. amount of numbers in a sub matrix to be replaced
+        int anzahlReplaceBis = 7; // Wie viele Zahlen in einer Matrix sollen maximal ersetzt werden / Max. amount of numbers in a sub matrix to be replaced
         int randomNum = (int)Math.floor(Math.random()*(anzahlReplaceBis-anzahlReplaceVon+1)+anzahlReplaceVon);
 
         for (dxdMatrix dxdMatrix : kM) {
@@ -195,20 +285,22 @@ public class Main {
             }
         }
 
+        System.out.println();
+
     }
 
     private static void printSudoku() {
-        int nrKM = 0; // Nummer kleine Matrix
+        int nrKM = 0; // Nummer an gezeichneten Erstzeilen von sub Matrizen / Number of printed rows from sub matrices
         int zeile = 0;
         int runZahler = 0;
+
+        SudokuBoard board = SudokuBoard.getInstance();
 
         System.out.println("  --A-B-C----D-E-F----G-H-I---");
 
         int array = 0;
 
         while(true) {
-
-            //System.out.println("☐");
 
             if (nrKM == 3) {
 
@@ -237,19 +329,18 @@ public class Main {
                     System.out.print(zeile + 1 + array + " ");
                     System.out.print("| ");
                 }
-                /*
-                if (array == 0 && nrKM == 0) {
-                    System.out.print(" ");
-                }
 
-                 */
                 if (kM[array].getZelle(n, zeile) == 0) {
-                    // todo
-                    //System.out.print("?");
                     System.out.print((char) 27 + "[34m?");
                     System.out.print((char) 27 + "[0m ");
+                } else if (board.get(array).getCell(zeile, n).isWrong()) {
+                    System.out.print((char) 27 + "[31m" + board.get(array).getCell(zeile, n).getValue());
+                    System.out.print((char) 27 + "[0m ");
+                } else if (board.get(array).getCell(zeile, n).isChangeable()) {
+                    System.out.print((char) 27 + "[36m" + board.get(array).getCell(zeile, n).getValue());
+                    System.out.print((char) 27 + "[0m ");
                 } else {
-                    System.out.print(kM[array].getZelle(n, zeile));
+                    System.out.print(board.get(array).getCell(zeile, n).getValue());
                     System.out.print(" ");
                 }
 
@@ -273,12 +364,33 @@ public class Main {
         int yWertLokal = 0;
         int matrixIndex = 0;
 
-        System.out.println("Geben Sie einen Buchstaben ein");
+        System.out.println("Geben Sie einen Buchstaben ein | Geben Sie \"ende\" ein um das Sudoku zu beenden");
 
         Scanner userInput = new Scanner(System.in);
 
         while (xWertGlobal == 0) {
             input = userInput.nextLine();
+
+            if (input.equals("ende")) {
+                if (xyGlobalFlasch.size() > 0) {
+                    System.out.println("Das Sudoku wurde mit Fehlern beendet");
+                    System.exit(0);
+                } else {
+                    for (dxdMatrix dxdm : kM) {
+                        for (int y = 0; y <3; y++) {
+                            for (int x = 0; x < 3; x++) {
+                                if (dxdm.getZelle(x, y) == 0) {
+                                    System.out.println("Das Sudoku wurde nicht vollständig ausgefüllt");
+                                    System.exit(0);
+                                }
+
+                            }
+                        }
+                    }
+                    System.out.println("Das Sudoku wurde ohne Fehler beendet");
+                    System.exit(0);
+                }
+            }
 
             if (input.length() > 1) {
                 System.out.println("Nur einen Buchstaben eingeben");
@@ -297,7 +409,6 @@ public class Main {
                 default -> System.out.println("Nur einen Großbuchstaben von A - I eingeben");
             }
 
-
         }
 
         while (yWertGlobal == 0) {
@@ -314,16 +425,14 @@ public class Main {
                 }
             }
         }
-        
-        System.out.println("xWertGlobal = " + xWertGlobal + " | yWertGlobal = " + yWertGlobal);
 
-        // 3x3 Matrix Index bestimmen
+        // 3x3 Matrix Index bestimmen / Get index of sub matrix
 
-        // Ist der x-Wert in einem Bereich von 1 - 3 (Matrix 1, 4, 7 möglich)
+        // Ist der x-Wert in einem Bereich von 1 - 3 (Matrix 1, 4, 7 möglich) / Is the x-Value in a scope of 1 - 3
 
-        // Ist der x-Wert in einem Bereich von 4 - 6 (Matrix 2, 5, 8 möglich)
+        // Ist der x-Wert in einem Bereich von 4 - 6 (Matrix 2, 5, 8 möglich) / Is the x-Value in a scope of 4 - 6
 
-        // Ist der x-Wert in einem Bereich von 7 - 9 (Matrix 3, 6, 9 möglich)
+        // Ist der x-Wert in einem Bereich von 7 - 9 (Matrix 3, 6, 9 möglich) / Is the x-Value in a scope of 7 - 9
 
         if (((xWertGlobal - 1) / 3) < 1) { // Matrix 1, 4, 7
             if (((yWertGlobal - 1) / 3) < 1) { // Matrix 1
@@ -352,11 +461,9 @@ public class Main {
             }
         }
 
-        System.out.println("Der Matrix index ist = " + matrixIndex);
+        // 3x3 Matrix Index + Globale x,y-Koordinaten in lokale x,y-Koordinaten umwandeln / sub matrix index + translate global x,y-coordinates to local x,y-coordinates
 
-        // 3x3 Matrix Index + Globale x,y-Koordinaten in lokale x,y-Koordinaten umwandeln
-
-        // Switch mit case für jede Matrix, welche die zu trimmende Menge an der x und y Koordinate enthält
+        // Switch mit case für jede Matrix, welche die zu trimmende Menge an der x und y Koordinate enthält / Switch with case for every matrix, containing the amount, with wich the x and y coordinates should be trimmed
 
         switch (matrixIndex) {
             case 1 -> {
@@ -397,12 +504,6 @@ public class Main {
             }
         }
 
-        System.out.println("Die lokalen Koordinaten der Auswahl sind x = " + xWertLokal + " und y = " + yWertLokal);
-
-        // Zahl der Auswahl bestimmen
-
-        System.out.println("Die Auswahl lautet: " + kM[(matrixIndex - 1)].getZelle((xWertLokal - 1), (yWertLokal - 1)));
-
         zahleinsetzen(matrixIndex, xWertLokal, yWertLokal);
 
     }
@@ -416,11 +517,18 @@ public class Main {
 
         input = userInput.nextLine();
 
+        SudokuBoard board = SudokuBoard.getInstance();
+
         while (true) {
             if (!input.isEmpty()) {
                 try {
                     if (Integer.parseInt(input) < 10 && Integer.parseInt(input) > 0) {
-                        kM[(matrixIndex - 1)].setZelle((xWertLokal - 1), (yWertLokal - 1), Integer.parseInt(input));
+                        if (board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).isChangeable()) { //Prüfen, ob Zelle verändert werden kann / Test if Cell can be changed
+                            kM[(matrixIndex - 1)].setZelle((xWertLokal - 1), (yWertLokal - 1), Integer.parseInt(input));
+                            board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setValue(Integer.parseInt(input));
+                        } else {
+                            System.out.println("Diese Stelle kann nicht verändert werden");
+                        }
                         break;
                     }
                 } catch (NumberFormatException e) {
@@ -429,26 +537,29 @@ public class Main {
             }
         }
 
-        printSudoku();
-
         eingabePrufen(matrixIndex, xWertLokal, yWertLokal);
 
     }
 
     public static void eingabePrufen(int matrixIndex, int xWertLokal, int yWertLokal) {
 
-        // zuerst prüfen, ob Eingabe nicht schon in der Matrix existiert
+        // zuerst prüfen, ob Eingabe nicht schon in der Matrix existiert / first, test if input does not already exist in sub matrix
+
+        SudokuBoard board = SudokuBoard.getInstance();
+
+        boolean fehler = false;
 
         for (int i = 0; i < 3; i++) {
 
             for (int n = 0; n < 3; n++) {
                 if (kM[(matrixIndex - 1)].getZelle((xWertLokal - 1), (yWertLokal - 1)) == kM[(matrixIndex - 1)].getZelle(n, i)) {
-                    if (!((xWertLokal - 1) == n && (yWertLokal - 1) == i)) {
-                        // Zwei gleiche Zahlen in einer Matrix wurden gefunden
-                        xGlobalFalsch.add(xWertLokal);
-                        yGlobalFalsch.add(yWertLokal);
-                        if (!matrixIndexFalsch.contains(matrixIndex)) {
-                            matrixIndexFalsch.add(matrixIndex);
+                    if (!((xWertLokal - 1) == n && (yWertLokal - 1) == i)) { // Ausschließen, dass die Eingabe mit sich selbst verglichen wurde / Exclude, that input is not compared to itself
+                        // Zwei gleiche Zahlen in der Matrix wurden gefunden / Two equal numbers where found in the sub matrix
+                        fehler = true;
+                        board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(true);
+                        if (!xyGlobalFlasch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
+                            xyGlobalFlasch.add(String.valueOf(yWertLokal) + xWertLokal);
+                            System.out.println(xyGlobalFlasch.get(0));
                             System.out.println("schreibe Matrix auf");
                         } else {
                             System.out.println("schreibe Matrix nicht auf, schon da");
@@ -462,9 +573,9 @@ public class Main {
             }
         }
 
-        // Dann prüfen, ob Eingabe nicht schon in der gesamten Sudoku Spalte und Zeile vorhanden ist
+        // Dann prüfen, ob Eingabe nicht schon in der gesamten Sudoku Spalte und Zeile vorhanden ist / Then examine, that input is not alredy present in the entire row and column of the Sudoku
 
-        // Mit Switch die zu prüfenden Matrizen finden
+        // Mit Switch die zu prüfenden Matrizen finden / Using a switch, find the matrices to be examined
 
         int[] xprufen = new int[2];
         int[] yprufen = new int[2];
@@ -526,27 +637,53 @@ public class Main {
             }
         }
 
-        // Zuerst die x-Achse überprüfen
+        // Zuerst die x-Achse überprüfen / first examine the x-Axis
 
         for (int i = 0; i < 2; i++) {
             for (int n = 0; n < 3; n++) {
                 if (kM[(xprufen[i] - 1)].getZelle(n, (yWertLokal - 1)) == kM[(matrixIndex - 1)].getZelle((xWertLokal - 1), (yWertLokal - 1))) {
+                    fehler = true;
+                    board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(true);
+                    if (!xyGlobalFlasch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
+                        xyGlobalFlasch.add(String.valueOf(yWertLokal) + xWertLokal);
+                        System.out.println(xyGlobalFlasch.get(0));
+                        System.out.println("schreibe Matrix auf");
+                    } else {
+                        System.out.println("schreibe Matrix nicht auf, schon da");
+                    }
                     System.out.println((char) 27 + "[31mgleiche zahl in x-Achse gefunden");
                     System.out.print((char) 27 + "[0m");
                 }
             }
         }
 
-        // Dann die y-Achse überprüfen
+        // Dann die y-Achse überprüfen / Then examine the y-Axis
 
         for (int i = 0; i < 2; i++) {
             for (int n = 0; n < 3; n++) {
                 if (kM[(yprufen[i] - 1)].getZelle((xWertLokal - 1), n) == kM[(matrixIndex - 1)].getZelle((xWertLokal - 1), (yWertLokal - 1))) {
+                    fehler = true;
+                    board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(true);
+                    if (!xyGlobalFlasch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
+                        xyGlobalFlasch.add(String.valueOf(yWertLokal) + xWertLokal);
+                    }
                     System.out.println((char) 27 + "[31mgleiche zahl in y-Achse gefunden");
                     System.out.print((char) 27 + "[0m");
                 }
             }
         }
+
+        // Falls Eingabe ohne Fehler, auf Eintrag in der Fehlerliste prüfen und falls vorhanden löschen / In case input has no mistakes, look for entry in mistake list and delete if present
+
+        if (!fehler) {
+            if (xyGlobalFlasch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
+                xyGlobalFlasch.remove(String.valueOf(yWertLokal) + xWertLokal);
+                board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(false);
+                System.out.println("Fehler behoben");
+            }
+        }
+
+        printSudoku();
 
         benutzerinteraktion();
     }

@@ -1,8 +1,14 @@
-
-
 import java.util.ArrayList;
 
 public class SudokuBoard extends ArrayList<Matrix> {
+
+    // implement Singleton Pattern
+
+    private static final SudokuBoard board = new SudokuBoard();
+
+    public static SudokuBoard getInstance() {
+        return board;
+    }
 
     public SudokuBoard() {
         super();
