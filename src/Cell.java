@@ -1,21 +1,21 @@
 public class Cell {
-    private int value;
+    private Integer value;
     private final boolean changeable;
 
     public Cell(int value) {
         this.value = value;
-        this.changeable = value == 0;
+        this.changeable = value != 0;
     }
 
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public boolean isChangable() {
+    public boolean isChangeable() {
         return changeable;
     }
 
-    public void setValue(int value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 
