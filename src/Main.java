@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -20,7 +19,7 @@ public class Main {
 
 
 
-    static ArrayList<Integer> NatrixFull = new ArrayList<>();
+    static ArrayList<Integer> MatrixFull = new ArrayList<>();
 
 /*
 
@@ -36,7 +35,7 @@ public class Main {
 
 
  */
-    static ArrayList<String> xyGlobalFlasch = new ArrayList<>();
+    static ArrayList<String> xyGlobalFalsch = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -73,7 +72,7 @@ public class Main {
         allMatrices.add(Matrix9);
 
         int anzahlReplaceVon = 2; // Wie viele Zahlen in einer Matrix sollen minimal ersetzt werden / Min. amount of numbers in a sub matrix to be replaced
-        int anzahlReplaceBis = 7; // Wie viele Zahlen in einer Matrix sollen maximal ersetzt werden / Max. amount of numbers in a sub matrix to be replaced
+        int anzahlReplaceBis = 5; // Wie viele Zahlen in einer Matrix sollen maximal ersetzt werden / Max. amount of numbers in a sub matrix to be replaced
 
         for (int i = 0; i < 9; i++) {
 
@@ -242,15 +241,15 @@ public class Main {
 
         //replaceRandom();
         for (int i = 0; i < 9; i++) {
-            NatrixFull.add(Matrix1[i]);
-            NatrixFull.add(Matrix2[i]);
-            NatrixFull.add(Matrix3[i]);
-            NatrixFull.add(Matrix4[i]);
-            NatrixFull.add(Matrix5[i]);
-            NatrixFull.add(Matrix6[i]);
-            NatrixFull.add(Matrix7[i]);
-            NatrixFull.add(Matrix8[i]);
-            NatrixFull.add(Matrix9[i]);
+            MatrixFull.add(Matrix1[i]);
+            MatrixFull.add(Matrix2[i]);
+            MatrixFull.add(Matrix3[i]);
+            MatrixFull.add(Matrix4[i]);
+            MatrixFull.add(Matrix5[i]);
+            MatrixFull.add(Matrix6[i]);
+            MatrixFull.add(Matrix7[i]);
+            MatrixFull.add(Matrix8[i]);
+            MatrixFull.add(Matrix9[i]);
         }
 
         kM = new dxdMatrix[] {
@@ -272,22 +271,6 @@ public class Main {
     }
 
     public static dxdMatrix[] kM = new dxdMatrix[9];
-
-    public void replaceRandom() {
-        int anzahlReplaceVon = 2; // Wie viele Zahlen in einer Matrix sollen minimal ersetzt werden / Min. amount of numbers in a sub matrix to be replaced
-        int anzahlReplaceBis = 7; // Wie viele Zahlen in einer Matrix sollen maximal ersetzt werden / Max. amount of numbers in a sub matrix to be replaced
-        int randomNum = (int)Math.floor(Math.random()*(anzahlReplaceBis-anzahlReplaceVon+1)+anzahlReplaceVon);
-
-        for (dxdMatrix dxdMatrix : kM) {
-            for (int i = 0; i < randomNum; i++) {
-                dxdMatrix.setZelle((int)Math.floor(Math.random()*(2 +1)+0), (int)Math.floor(Math.random()*(2 +1)+0), 0);
-
-            }
-        }
-
-        System.out.println();
-
-    }
 
     private static void printSudoku() {
         int nrKM = 0; // Nummer an gezeichneten Erstzeilen von sub Matrizen / Number of printed rows from sub matrices
@@ -372,7 +355,7 @@ public class Main {
             input = userInput.nextLine();
 
             if (input.equals("ende")) {
-                if (xyGlobalFlasch.size() > 0) {
+                if (xyGlobalFalsch.size() > 0) {
                     System.out.println("Das Sudoku wurde mit Fehlern beendet");
                     System.exit(0);
                 } else {
@@ -557,12 +540,8 @@ public class Main {
                         // Zwei gleiche Zahlen in der Matrix wurden gefunden / Two equal numbers where found in the sub matrix
                         fehler = true;
                         board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(true);
-                        if (!xyGlobalFlasch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
-                            xyGlobalFlasch.add(String.valueOf(yWertLokal) + xWertLokal);
-                            System.out.println(xyGlobalFlasch.get(0));
-                            System.out.println("schreibe Matrix auf");
-                        } else {
-                            System.out.println("schreibe Matrix nicht auf, schon da");
+                        if (!xyGlobalFalsch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
+                            xyGlobalFalsch.add(String.valueOf(yWertLokal) + xWertLokal);
                         }
                         System.out.println((char) 27 + "[31mZahl bereits in der 3x3 Matrix vorhanden");
                         System.out.print((char) 27 + "[0m");
@@ -573,7 +552,7 @@ public class Main {
             }
         }
 
-        // Dann prüfen, ob Eingabe nicht schon in der gesamten Sudoku Spalte und Zeile vorhanden ist / Then examine, that input is not alredy present in the entire row and column of the Sudoku
+        // Dann prüfen, ob Eingabe nicht schon in der gesamten Sudoku Spalte und Zeile vorhanden ist / Then examine, that input is not already present in the entire row and column of the Sudoku
 
         // Mit Switch die zu prüfenden Matrizen finden / Using a switch, find the matrices to be examined
 
@@ -644,12 +623,8 @@ public class Main {
                 if (kM[(xprufen[i] - 1)].getZelle(n, (yWertLokal - 1)) == kM[(matrixIndex - 1)].getZelle((xWertLokal - 1), (yWertLokal - 1))) {
                     fehler = true;
                     board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(true);
-                    if (!xyGlobalFlasch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
-                        xyGlobalFlasch.add(String.valueOf(yWertLokal) + xWertLokal);
-                        System.out.println(xyGlobalFlasch.get(0));
-                        System.out.println("schreibe Matrix auf");
-                    } else {
-                        System.out.println("schreibe Matrix nicht auf, schon da");
+                    if (!xyGlobalFalsch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
+                        xyGlobalFalsch.add(String.valueOf(yWertLokal) + xWertLokal);
                     }
                     System.out.println((char) 27 + "[31mgleiche zahl in x-Achse gefunden");
                     System.out.print((char) 27 + "[0m");
@@ -664,8 +639,8 @@ public class Main {
                 if (kM[(yprufen[i] - 1)].getZelle((xWertLokal - 1), n) == kM[(matrixIndex - 1)].getZelle((xWertLokal - 1), (yWertLokal - 1))) {
                     fehler = true;
                     board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(true);
-                    if (!xyGlobalFlasch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
-                        xyGlobalFlasch.add(String.valueOf(yWertLokal) + xWertLokal);
+                    if (!xyGlobalFalsch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
+                        xyGlobalFalsch.add(String.valueOf(yWertLokal) + xWertLokal);
                     }
                     System.out.println((char) 27 + "[31mgleiche zahl in y-Achse gefunden");
                     System.out.print((char) 27 + "[0m");
@@ -676,8 +651,8 @@ public class Main {
         // Falls Eingabe ohne Fehler, auf Eintrag in der Fehlerliste prüfen und falls vorhanden löschen / In case input has no mistakes, look for entry in mistake list and delete if present
 
         if (!fehler) {
-            if (xyGlobalFlasch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
-                xyGlobalFlasch.remove(String.valueOf(yWertLokal) + xWertLokal);
+            if (xyGlobalFalsch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
+                xyGlobalFalsch.remove(String.valueOf(yWertLokal) + xWertLokal);
                 board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(false);
                 System.out.println("Fehler behoben");
             }
