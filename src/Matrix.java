@@ -30,7 +30,7 @@ public class Matrix extends ArrayList<ArrayList<Cell>>{
                 System.out.print((char) 27 + "[34m ? ");
                 System.out.print((char) 27 + "[0m");
             } else if (this.get(0).get(i).isChangeable() && this.get(0).get(i).getValue() != 0) { // Print turquoise if number is changeable
-                System.out.print((char) 27 + "[36m" + ' ' + this.get(0).get(i).getValue().toString() + ' ');
+                System.out.print((char) 27 + "[33m" + ' ' + this.get(0).get(i).getValue().toString() + ' ');
                 System.out.print((char) 27 + "[0m");
             } else {
                 System.out.print(' ' + this.get(0).get(i).getValue().toString() + ' '); // Print number white if it is not changeable
@@ -44,7 +44,7 @@ public class Matrix extends ArrayList<ArrayList<Cell>>{
                 System.out.print((char) 27 + "[34m ? ");
                 System.out.print((char) 27 + "[0m");
             } else if (this.get(1).get(i).isChangeable() && this.get(1).get(i).getValue() != 0) {
-                System.out.print((char) 27 + "[36m" + ' ' + this.get(1).get(i).getValue().toString() + ' ');
+                System.out.print((char) 27 + "[33m" + ' ' + this.get(1).get(i).getValue().toString() + ' ');
                 System.out.print((char) 27 + "[0m");
             } else {
                 System.out.print(' ' + this.get(1).get(i).getValue().toString() + ' ');
@@ -58,7 +58,7 @@ public class Matrix extends ArrayList<ArrayList<Cell>>{
                 System.out.print((char) 27 + "[34m ? ");
                 System.out.print((char) 27 + "[0m");
             } else if (this.get(2).get(i).isChangeable() && this.get(2).get(i).getValue() != 0) {
-                System.out.print((char) 27 + "[36m" + ' ' + this.get(2).get(i).getValue().toString() + ' ');
+                System.out.print((char) 27 + "[33m" + ' ' + this.get(2).get(i).getValue().toString() + ' ');
                 System.out.print((char) 27 + "[0m");
             } else {
                 System.out.print(' ' + this.get(2).get(i).getValue().toString() + ' ');

@@ -320,7 +320,7 @@ public class Main {
                     System.out.print((char) 27 + "[31m" + board.get(array).getCell(zeile, n).getValue());
                     System.out.print((char) 27 + "[0m ");
                 } else if (board.get(array).getCell(zeile, n).isChangeable()) {
-                    System.out.print((char) 27 + "[36m" + board.get(array).getCell(zeile, n).getValue());
+                    System.out.print((char) 27 + "[33m" + board.get(array).getCell(zeile, n).getValue());
                     System.out.print((char) 27 + "[0m ");
                 } else {
                     System.out.print(board.get(array).getCell(zeile, n).getValue());
