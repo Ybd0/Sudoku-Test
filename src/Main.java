@@ -426,6 +426,8 @@ public class Main {
                 System.out.println("Nur einen Buchstaben eingeben");
             }
 
+            input = input.toUpperCase();
+
             switch (input) {
                 case "A" -> xWertGlobal = 1;
                 case "B" -> xWertGlobal = 2;
@@ -436,7 +438,7 @@ public class Main {
                 case "G" -> xWertGlobal = 7;
                 case "H" -> xWertGlobal = 8;
                 case "I" -> xWertGlobal = 9;
-                default -> System.out.println("Nur einen Großbuchstaben von A - I eingeben");
+                default -> System.out.println("Bitte nur einen Buchstaben von A - I eingeben.");
             }
 
         }
