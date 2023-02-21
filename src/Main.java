@@ -17,6 +17,7 @@ public class Main {
     static ArrayList<int[]> allMatrices = new ArrayList<>();
 
     static int mistakes = 0;
+    static int mistakesMax = 0;
 /*
 
     static int[] Matrix1 = { 1,  2,  3,  4,  5,  6,  7,  8,  9};
@@ -68,6 +69,8 @@ public class Main {
         allMatrices.add(Matrix9);
 
         setDifficulty();
+
+        setGameOverCondition();
 
         m1.add(new ArrayList<>(){{
             add(new Cell(Matrix1[0]));
@@ -269,6 +272,36 @@ public class Main {
             if (min != 0) {
                 replaceRandom(min, max);
                 break;
+            }
+        }
+    }
+
+    public static void setGameOverCondition() {
+        System.out.println();
+        System.out.println("Nach wie vielen Fehlern soll das Spiel beendet werden?");
+        System.out.println("0 - Spiel nicht beenden, >= 1 - Spiel nach einem/mehreren Fehler/n beenden");
+
+        String input;
+
+        Scanner userInput = new Scanner(System.in);
+
+        while (true) {
+            input = userInput.nextLine();
+
+            try {
+                if (Integer.parseInt(input) == 0) {
+                    mistakesMax = 0;
+                    System.out.println("Das Spiel wird nicht basierend auf Fehlern beendet");
+                    break;
+                } else if (Integer.parseInt(input) > 0) {
+                    mistakesMax = Integer.parseInt(input);
+                    System.out.println("Das Spiel wird nach " + mistakesMax + " Fehlern beendet");
+                    break;
+                } else {
+                    System.out.println("Es können nur Zahlen größer gleich 0 eingegeben werden");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Nur Zahlen eingeben");
             }
         }
     }
@@ -671,6 +704,13 @@ public class Main {
             }
         } else {
             mistakes ++;
+
+            if (mistakes > mistakesMax) {
+                if (mistakesMax != 0) {
+                    System.out.println("Du hast die maximale Anzahl an Fehlern erreicht");
+                    System.exit(0);
+                }
+            }
         }
 
         printSudoku();
