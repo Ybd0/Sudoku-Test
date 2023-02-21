@@ -359,17 +359,22 @@ public class Main {
                     System.out.print("| ");
                 }
 
-                if (board.get(array).getCell(zeile, n).getValue() == 0) {
+                Cell currentCell = board.get(array).getCell(zeile, n);
+
+                if (currentCell.getValue() == 0) {
                     System.out.print((char) 27 + "[34m?");
                     System.out.print((char) 27 + "[0m ");
-                } else if (board.get(array).getCell(zeile, n).isWrong()) {
-                    System.out.print((char) 27 + "[31m" + board.get(array).getCell(zeile, n).getValue());
+
+                } else if (currentCell.isWrong()) {
+                    System.out.print((char) 27 + "[31m" + currentCell.getValue());
                     System.out.print((char) 27 + "[0m ");
-                } else if (board.get(array).getCell(zeile, n).isChangeable()) {
-                    System.out.print((char) 27 + "[33m" + board.get(array).getCell(zeile, n).getValue());
+
+                } else if (currentCell.isChangeable()) {
+                    System.out.print((char) 27 + "[33m" + currentCell.getValue());
                     System.out.print((char) 27 + "[0m ");
+
                 } else {
-                    System.out.print(board.get(array).getCell(zeile, n).getValue());
+                    System.out.print(currentCell.getValue());
                     System.out.print(" ");
                 }
 
