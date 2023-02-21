@@ -16,6 +16,7 @@ public class Main {
 
     static ArrayList<int[]> allMatrices = new ArrayList<>();
 
+    static int mistakes = 0;
 /*
 
     static int[] Matrix1 = { 1,  2,  3,  4,  5,  6,  7,  8,  9};
@@ -66,18 +67,7 @@ public class Main {
         allMatrices.add(Matrix8);
         allMatrices.add(Matrix9);
 
-        int anzahlReplaceVon = 2; // Wie viele Zahlen in einer Matrix sollen minimal ersetzt werden / Min. amount of numbers in a sub matrix to be replaced
-        int anzahlReplaceBis = 5; // Wie viele Zahlen in einer Matrix sollen maximal ersetzt werden / Max. amount of numbers in a sub matrix to be replaced
-
-        for (int i = 0; i < 9; i++) {
-
-            int randomNum = (int)Math.floor(Math.random()*(anzahlReplaceBis-anzahlReplaceVon+1)+anzahlReplaceVon);
-
-            for (int o = 0; o < randomNum; o++) {
-                int randomIndex = (int)Math.floor(Math.random()*(8 +1)+0);
-                allMatrices.get(i)[randomIndex] = 0;
-            }
-        }
+        setDifficulty();
 
         m1.add(new ArrayList<>(){{
             add(new Cell(Matrix1[0]));
@@ -239,6 +229,60 @@ public class Main {
 
         benutzerinteraktion();
 
+    }
+
+    public static void setDifficulty() {
+        System.out.println("Sudoku");
+        System.out.println();
+        System.out.println("Schwierigkeitsgrad einstellen: 1 - Einfach, 2 - Mittel, 3 - Schwer");
+
+        String input;
+
+        Scanner userInput = new Scanner(System.in);
+
+        while (true) {
+            input = userInput.nextLine();
+
+            int min = 0;
+            int max = 0;
+
+            try {
+                switch (Integer.parseInt(input)) {
+                    case 1 -> {
+                        min = 2;
+                        max = 5;
+                    }
+                    case 2 -> {
+                        min = 4;
+                        max = 7;
+                    }
+                    case 3 -> {
+                        min = 6;
+                        max = 9;
+                    }
+                    default -> System.out.println("Nur eine Zahl von 1 - 3 eingeben");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Nur eine Zahl eingeben");
+            }
+
+            if (min != 0) {
+                replaceRandom(min, max);
+                break;
+            }
+        }
+    }
+
+    public static void replaceRandom(int min, int max) {
+        for (int i = 0; i < 9; i++) {
+
+            int randomNum = (int)Math.floor(Math.random()*(max - min +1)+ min);
+
+            for (int o = 0; o < randomNum; o++) {
+                int randomIndex = (int)Math.floor(Math.random()*(8 +1)+0);
+                allMatrices.get(i)[randomIndex] = 0;
+            }
+        }
     }
 
     private static void printSudoku() {
@@ -625,6 +669,8 @@ public class Main {
                 board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(false);
                 System.out.println("Fehler behoben");
             }
+        } else {
+            mistakes ++;
         }
 
         printSudoku();
