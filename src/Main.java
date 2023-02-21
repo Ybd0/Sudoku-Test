@@ -1,9 +1,8 @@
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
-
-
 
     static int[] Matrix1 = {2, 5, 9, 8, 7, 1, 6, 4, 3};
     static int[] Matrix2 = {3, 1, 4, 6, 2, 9, 5, 8, 7};
@@ -16,10 +15,6 @@ public class Main {
     static int[] Matrix9 = {8, 4, 1, 3, 2, 5, 6, 7, 9};
 
     static ArrayList<int[]> allMatrices = new ArrayList<>();
-
-
-
-    static ArrayList<Integer> MatrixFull = new ArrayList<>();
 
 /*
 
@@ -239,30 +234,6 @@ public class Main {
         board.add(m8);
         board.add(m9);
 
-        //replaceRandom();
-        for (int i = 0; i < 9; i++) {
-            MatrixFull.add(Matrix1[i]);
-            MatrixFull.add(Matrix2[i]);
-            MatrixFull.add(Matrix3[i]);
-            MatrixFull.add(Matrix4[i]);
-            MatrixFull.add(Matrix5[i]);
-            MatrixFull.add(Matrix6[i]);
-            MatrixFull.add(Matrix7[i]);
-            MatrixFull.add(Matrix8[i]);
-            MatrixFull.add(Matrix9[i]);
-        }
-
-        kM = new dxdMatrix[] {
-                new dxdMatrix(Matrix1),
-                new dxdMatrix(Matrix2),
-                new dxdMatrix(Matrix3),
-                new dxdMatrix(Matrix4),
-                new dxdMatrix(Matrix5),
-                new dxdMatrix(Matrix6),
-                new dxdMatrix(Matrix7),
-                new dxdMatrix(Matrix8),
-                new dxdMatrix(Matrix9)
-        };
 
         printSudoku();
 
@@ -270,10 +241,8 @@ public class Main {
 
     }
 
-    public static dxdMatrix[] kM = new dxdMatrix[9];
-
     private static void printSudoku() {
-        int nrKM = 0; // Nummer an gezeichneten Erstzeilen von sub Matrizen / Number of printed rows from sub matrices
+        int nrKM = 0; // Nummer an gezeichneten Zeilen von sub Matrizen / Number of printed rows from sub matrices
         int zeile = 0;
         int runZahler = 0;
 
@@ -313,7 +282,7 @@ public class Main {
                     System.out.print("| ");
                 }
 
-                if (kM[array].getZelle(n, zeile) == 0) {
+                if (board.get(array).getCell(zeile, n).getValue() == 0) {
                     System.out.print((char) 27 + "[34m?");
                     System.out.print((char) 27 + "[0m ");
                 } else if (board.get(array).getCell(zeile, n).isWrong()) {
@@ -341,6 +310,8 @@ public class Main {
     public static void benutzerinteraktion() {
         String input;
 
+        SudokuBoard board = SudokuBoard.getInstance();
+
         int xWertGlobal = 0;
         int yWertGlobal = 0;
         int xWertLokal = 0;
@@ -359,14 +330,13 @@ public class Main {
                     System.out.println("Das Sudoku wurde mit Fehlern beendet");
                     System.exit(0);
                 } else {
-                    for (dxdMatrix dxdm : kM) {
+                    for (int i = 0; i < 9; i++) {
                         for (int y = 0; y <3; y++) {
                             for (int x = 0; x < 3; x++) {
-                                if (dxdm.getZelle(x, y) == 0) {
+                                if (board.get(i).getCell(y, x).getValue() == 0) {
                                     System.out.println("Das Sudoku wurde nicht vollständig ausgefüllt");
                                     System.exit(0);
                                 }
-
                             }
                         }
                     }
@@ -507,7 +477,6 @@ public class Main {
                 try {
                     if (Integer.parseInt(input) < 10 && Integer.parseInt(input) > 0) {
                         if (board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).isChangeable()) { //Prüfen, ob Zelle verändert werden kann / Test if Cell can be changed
-                            kM[(matrixIndex - 1)].setZelle((xWertLokal - 1), (yWertLokal - 1), Integer.parseInt(input));
                             board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setValue(Integer.parseInt(input));
                         } else {
                             System.out.println("Diese Stelle kann nicht verändert werden");
@@ -535,7 +504,7 @@ public class Main {
         for (int i = 0; i < 3; i++) {
 
             for (int n = 0; n < 3; n++) {
-                if (kM[(matrixIndex - 1)].getZelle((xWertLokal - 1), (yWertLokal - 1)) == kM[(matrixIndex - 1)].getZelle(n, i)) {
+                if (Objects.equals(board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).getValue(), board.get((matrixIndex - 1)).getCell(i, n).getValue())) {
                     if (!((xWertLokal - 1) == n && (yWertLokal - 1) == i)) { // Ausschließen, dass die Eingabe mit sich selbst verglichen wurde / Exclude, that input is not compared to itself
                         // Zwei gleiche Zahlen in der Matrix wurden gefunden / Two equal numbers where found in the sub matrix
                         fehler = true;
@@ -620,7 +589,7 @@ public class Main {
 
         for (int i = 0; i < 2; i++) {
             for (int n = 0; n < 3; n++) {
-                if (kM[(xprufen[i] - 1)].getZelle(n, (yWertLokal - 1)) == kM[(matrixIndex - 1)].getZelle((xWertLokal - 1), (yWertLokal - 1))) {
+                if (Objects.equals(board.get((xprufen[i] - 1)).getCell((yWertLokal - 1), n).getValue(), board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).getValue())) {
                     fehler = true;
                     board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(true);
                     if (!xyGlobalFalsch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
@@ -636,7 +605,7 @@ public class Main {
 
         for (int i = 0; i < 2; i++) {
             for (int n = 0; n < 3; n++) {
-                if (kM[(yprufen[i] - 1)].getZelle((xWertLokal - 1), n) == kM[(matrixIndex - 1)].getZelle((xWertLokal - 1), (yWertLokal - 1))) {
+                if (Objects.equals(board.get((yprufen[i] - 1)).getCell(n, (xWertLokal - 1)).getValue(), board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).getValue())) {
                     fehler = true;
                     board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(true);
                     if (!xyGlobalFalsch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
