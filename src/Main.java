@@ -599,11 +599,11 @@ public class Main {
 
         prufanzahl = xyGlobalFalsch.size();
 
-        eingabePrufen(matrixIndex, xWertLokal, yWertLokal);
+        eingabePrufen(matrixIndex, xWertLokal, yWertLokal, true);
 
     }
 
-    public static void eingabePrufen(int matrixIndex, int xWertLokal, int yWertLokal) {
+    public static void eingabePrufen(int matrixIndex, int xWertLokal, int yWertLokal, boolean firstRun) {
 
         // zuerst prüfen, ob Eingabe nicht schon in der Matrix existiert / first, test if input does not already exist in sub matrix
 
@@ -736,7 +736,9 @@ public class Main {
                 System.out.println("Fehler behoben");
             }
         } else {
-            mistakes ++;
+            if (firstRun) {
+                mistakes ++;
+            }
 
             if (mistakes > mistakesMax) {
                 if (mistakesMax != 0) {
@@ -753,7 +755,7 @@ public class Main {
                 int y = Integer.parseInt(String.valueOf(xyGlobalFalsch.get(0).charAt(1)));
                 prufanzahl --;
 
-                eingabePrufen(mI, x, y);
+                eingabePrufen(mI, x, y, false);
             }
         }
 
