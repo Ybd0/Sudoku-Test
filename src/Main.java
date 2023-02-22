@@ -748,9 +748,9 @@ public class Main {
             }
         }
 
-        if (prufanzahl > 0) {
+        if (prufanzahl > 0) { // Search the entire list of mistakes and validate them
             for (int i = 0; i < xyGlobalFalsch.size(); i++) {
-                int mI = Integer.parseInt(String.valueOf(xyGlobalFalsch.get(0).charAt(0))); // Search the entire list of mistakes and validate them
+                int mI = Integer.parseInt(String.valueOf(xyGlobalFalsch.get(0).charAt(0)));
                 int x = Integer.parseInt(String.valueOf(xyGlobalFalsch.get(0).charAt(2)));
                 int y = Integer.parseInt(String.valueOf(xyGlobalFalsch.get(0).charAt(1)));
                 prufanzahl --;
