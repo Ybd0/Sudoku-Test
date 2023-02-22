@@ -19,6 +19,7 @@ public class Main {
     static int mistakes = 0;
     static int mistakesMax = 0;
     static int wins = 0;
+    static int prufanzahl = 0;
     static long lastGameTime = 0;
     static long lastWonGameTime = 0;
     static long startTime = 0;
@@ -596,6 +597,8 @@ public class Main {
             }
         }
 
+        prufanzahl = xyGlobalFalsch.size();
+
         eingabePrufen(matrixIndex, xWertLokal, yWertLokal);
 
     }
@@ -616,8 +619,8 @@ public class Main {
                         // Zwei gleiche Zahlen in der Matrix wurden gefunden / Two equal numbers where found in the sub matrix
                         fehler = true;
                         board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(true);
-                        if (!xyGlobalFalsch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
-                            xyGlobalFalsch.add(String.valueOf(yWertLokal) + xWertLokal);
+                        if (!xyGlobalFalsch.contains(String.valueOf(matrixIndex) + yWertLokal + xWertLokal)) {
+                            xyGlobalFalsch.add(String.valueOf(matrixIndex) + yWertLokal + xWertLokal);
                         }
                         System.out.println((char) 27 + "[31mZahl bereits in der 3x3 Matrix vorhanden");
                         System.out.print((char) 27 + "[0m");
@@ -699,10 +702,10 @@ public class Main {
                 if (Objects.equals(board.get((xprufen[i] - 1)).getCell((yWertLokal - 1), n).getValue(), board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).getValue())) {
                     fehler = true;
                     board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(true);
-                    if (!xyGlobalFalsch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
-                        xyGlobalFalsch.add(String.valueOf(yWertLokal) + xWertLokal);
+                    if (!xyGlobalFalsch.contains(String.valueOf(matrixIndex) + yWertLokal + xWertLokal)) {
+                        xyGlobalFalsch.add(String.valueOf(matrixIndex) + yWertLokal + xWertLokal);
                     }
-                    System.out.println((char) 27 + "[31mgleiche zahl in x-Achse gefunden");
+                    System.out.println((char) 27 + "[31m" + "gleiche zahl in x-Achse gefunden");
                     System.out.print((char) 27 + "[0m");
                 }
             }
@@ -715,10 +718,10 @@ public class Main {
                 if (Objects.equals(board.get((yprufen[i] - 1)).getCell(n, (xWertLokal - 1)).getValue(), board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).getValue())) {
                     fehler = true;
                     board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(true);
-                    if (!xyGlobalFalsch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
-                        xyGlobalFalsch.add(String.valueOf(yWertLokal) + xWertLokal);
+                    if (!xyGlobalFalsch.contains(String.valueOf(matrixIndex) + yWertLokal + xWertLokal)) {
+                        xyGlobalFalsch.add(String.valueOf(matrixIndex) + yWertLokal + xWertLokal);
                     }
-                    System.out.println((char) 27 + "[31mgleiche zahl in y-Achse gefunden");
+                    System.out.println((char) 27 + "[31m" + "gleiche zahl in y-Achse gefunden");
                     System.out.print((char) 27 + "[0m");
                 }
             }
@@ -727,8 +730,8 @@ public class Main {
         // Falls Eingabe ohne Fehler, auf Eintrag in der Fehlerliste prüfen und falls vorhanden löschen / In case input has no mistakes, look for entry in mistake list and delete if present
 
         if (!fehler) {
-            if (xyGlobalFalsch.contains(String.valueOf(yWertLokal) + xWertLokal)) {
-                xyGlobalFalsch.remove(String.valueOf(yWertLokal) + xWertLokal);
+            if (xyGlobalFalsch.contains(String.valueOf(matrixIndex) + yWertLokal + xWertLokal)) {
+                xyGlobalFalsch.remove(String.valueOf(matrixIndex) + yWertLokal + xWertLokal);
                 board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(false);
                 System.out.println("Fehler behoben");
             }
@@ -740,6 +743,17 @@ public class Main {
                     System.out.println("Du hast die maximale Anzahl an Fehlern erreicht");
                     System.exit(0);
                 }
+            }
+        }
+
+        if (prufanzahl > 0) {
+            for (int i = 0; i < xyGlobalFalsch.size(); i++) {
+                int mI = Integer.parseInt(String.valueOf(xyGlobalFalsch.get(0).charAt(0))); // Search the entire list of mistakes and validate them
+                int x = Integer.parseInt(String.valueOf(xyGlobalFalsch.get(0).charAt(2)));
+                int y = Integer.parseInt(String.valueOf(xyGlobalFalsch.get(0).charAt(1)));
+                prufanzahl --;
+
+                eingabePrufen(mI, x, y);
             }
         }
 
