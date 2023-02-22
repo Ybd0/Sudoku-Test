@@ -15,9 +15,15 @@ public class Main {
     static int[] Matrix9 = {8, 4, 1, 3, 2, 5, 6, 7, 9};
 
     static ArrayList<int[]> allMatrices = new ArrayList<>();
-
+    static ArrayList<String> xyGlobalFalsch = new ArrayList<>();
     static int mistakes = 0;
     static int mistakesMax = 0;
+    static int wins = 0;
+    static long lastGameTime = 0;
+    static long lastWonGameTime = 0;
+    static long startTime = 0;
+
+    static String difficulty;
 /*
 
     static int[] Matrix1 = { 1,  2,  3,  4,  5,  6,  7,  8,  9};
@@ -32,7 +38,7 @@ public class Main {
 
 
  */
-    static ArrayList<String> xyGlobalFalsch = new ArrayList<>();
+
 
     public static void main(String[] args) {
 
@@ -230,8 +236,10 @@ public class Main {
 
         printSudoku();
 
-        benutzerinteraktion();
+        startTime = System.currentTimeMillis();
 
+
+        benutzerinteraktion();
     }
 
     public static void setDifficulty() {
@@ -254,14 +262,17 @@ public class Main {
                     case 1 -> {
                         min = 2;
                         max = 5;
+                        difficulty = "einfach";
                     }
                     case 2 -> {
                         min = 4;
                         max = 7;
+                        difficulty = "mittel";
                     }
                     case 3 -> {
                         min = 6;
                         max = 9;
+                        difficulty = "schwer";
                     }
                     default -> System.out.println("Nur eine Zahl von 1 - 3 eingeben");
                 }
@@ -324,6 +335,12 @@ public class Main {
         int runZahler = 0;
 
         SudokuBoard board = SudokuBoard.getInstance();
+
+        if (mistakesMax == 0) {
+            System.out.println("Fehler: " + mistakes + " (keine Grenze)" + " | " + "Schweregrad: " + difficulty);
+        } else {
+            System.out.println("Fehler: " + mistakes + "/" + mistakesMax + " | " + "Schweregrad: " + difficulty);
+        }
 
         System.out.println("  --A-B-C----D-E-F----G-H-I---");
 
@@ -405,20 +422,33 @@ public class Main {
             if (input.equals("ende")) {
                 if (xyGlobalFalsch.size() > 0) {
                     System.out.println("Das Sudoku wurde mit Fehlern beendet");
-                    System.exit(0);
+                    long endTime = System.currentTimeMillis();
+                    lastGameTime = (endTime - startTime) / 60000;
+                    System.out.println("Benötigte Zeit: " + lastGameTime + " min");
+                    String[] args = {};
+                    main(args);
                 } else {
                     for (int i = 0; i < 9; i++) {
                         for (int y = 0; y <3; y++) {
                             for (int x = 0; x < 3; x++) {
                                 if (board.get(i).getCell(y, x).getValue() == 0) {
                                     System.out.println("Das Sudoku wurde nicht vollständig ausgefüllt");
-                                    System.exit(0);
+                                    long endTime = System.currentTimeMillis();
+                                    lastGameTime = (endTime - startTime) / 60000;
+                                    System.out.println("Benötigte Zeit: " + lastGameTime + " min");
+                                    String[] args = {};
+                                    main(args);
                                 }
                             }
                         }
                     }
                     System.out.println("Das Sudoku wurde ohne Fehler beendet");
-                    System.exit(0);
+                    wins ++;
+                    long endTime = System.currentTimeMillis();
+                    lastWonGameTime = (endTime - startTime) / 60000;
+                    System.out.println("Benötigte Zeit: " + lastWonGameTime + " min");
+                    String[] args = {};
+                    main(args);
                 }
             }
 
