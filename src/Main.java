@@ -95,7 +95,7 @@ public class Main {
         allMatrices.add(Matrix8);
         allMatrices.add(Matrix9);
 
-        //setDifficulty();
+        setDifficulty();
 
         setGameOverCondition();
 
