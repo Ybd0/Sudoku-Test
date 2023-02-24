@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 
+    /*
     static int[] Matrix1 = {2, 5, 9, 8, 7, 1, 6, 4, 3};
     static int[] Matrix2 = {3, 1, 4, 6, 2, 9, 5, 8, 7};
     static int[] Matrix3 = {7, 6, 8, 4, 5, 3, 1, 9, 2};
@@ -14,19 +15,22 @@ public class Main {
     static int[] Matrix8 = {2, 5, 3, 7, 9, 6, 1, 4, 8};
     static int[] Matrix9 = {8, 4, 1, 3, 2, 5, 6, 7, 9};
 
+
+     */
+
     static ArrayList<int[]> allMatrices = new ArrayList<>();
     static ArrayList<String> xyGlobalFalsch = new ArrayList<>();
     static int mistakes = 0;
     static int mistakesMax = 0;
     static int wins = 0;
-    static int prufanzahl = 0;
+    static int checks = 0;
     static long lastGameTime = 0;
     static long lastWonGameTime = 0;
     static long startTime = 0;
 
     static String difficulty;
-/*
 
+/*
     static int[] Matrix1 = { 1,  2,  3,  4,  5,  6,  7,  8,  9};
     static int[] Matrix2 = {10, 11, 12, 13, 14, 15, 16, 17, 18};
     static int[] Matrix3 = {19, 20, 21, 22, 23, 24, 25, 26, 27};
@@ -41,7 +45,23 @@ public class Main {
  */
 
 
+    static int[] Matrix1 = { 1,  2,  3,  2,  3,  4,  3,  4,  5};
+    static int[] Matrix2 = { 4,  5,  6,  5,  6,  7,  6,  7,  8};
+    static int[] Matrix3 = { 7,  8,  9,  8,  9,  1,  9,  1,  2};
+    static int[] Matrix4 = { 4,  5,  6,  5,  6,  7,  6,  7,  8};
+    static int[] Matrix5 = { 7,  8,  9,  8,  9,  1,  9,  1,  2};
+    static int[] Matrix6 = { 1,  2,  3,  2,  3,  4,  3,  4,  5};
+    static int[] Matrix7 = { 7,  8,  9,  8,  9,  1,  9,  1,  2};
+    static int[] Matrix8 = { 1,  2,  3,  2,  3,  4,  3,  4,  5};
+    static int[] Matrix9 = { 4,  5,  6,  5,  6,  7,  6,  7,  8};
+
+
+
+
+
     public static void main(String[] args) {
+
+        GererateSudoku.fillArray();
 
         System.out.println();
 
@@ -75,7 +95,7 @@ public class Main {
         allMatrices.add(Matrix8);
         allMatrices.add(Matrix9);
 
-        setDifficulty();
+        //setDifficulty();
 
         setGameOverCondition();
 
@@ -597,13 +617,13 @@ public class Main {
             }
         }
 
-        prufanzahl = xyGlobalFalsch.size();
+        checks = xyGlobalFalsch.size();
 
-        eingabePrufen(matrixIndex, xWertLokal, yWertLokal, true);
+        checkInput(matrixIndex, xWertLokal, yWertLokal, true);
 
     }
 
-    public static void eingabePrufen(int matrixIndex, int xWertLokal, int yWertLokal, boolean firstRun) {
+    public static void checkInput(int matrixIndex, int xWertLokal, int yWertLokal, boolean firstRun) {
 
         // zuerst prüfen, ob Eingabe nicht schon in der Matrix existiert / first, test if input does not already exist in sub matrix
 
@@ -743,19 +763,23 @@ public class Main {
             if (mistakes > mistakesMax) {
                 if (mistakesMax != 0) {
                     System.out.println("Du hast die maximale Anzahl an Fehlern erreicht");
-                    System.exit(0);
+                    long endTime = System.currentTimeMillis();
+                    lastGameTime = (endTime - startTime) / 60000;
+                    System.out.println("Benötigte Zeit: " + lastGameTime + " min");
+                    String[] args = {};
+                    main(args);
                 }
             }
         }
 
-        if (prufanzahl > 0) { // Search the entire list of mistakes and validate them
+        if (checks > 0) { // Search the entire list of mistakes and validate them
             for (int i = 0; i < xyGlobalFalsch.size(); i++) {
                 int mI = Integer.parseInt(String.valueOf(xyGlobalFalsch.get(0).charAt(0)));
                 int x = Integer.parseInt(String.valueOf(xyGlobalFalsch.get(0).charAt(2)));
                 int y = Integer.parseInt(String.valueOf(xyGlobalFalsch.get(0).charAt(1)));
-                prufanzahl --;
+                checks --;
 
-                eingabePrufen(mI, x, y, false);
+                checkInput(mI, x, y, false);
             }
         }
 
