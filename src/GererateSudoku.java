@@ -25,12 +25,14 @@ public class GererateSudoku {
 
         testAll = new int[][]{test1, test2, test3, test4, test5, test6, test7, test8, test9};
 
-
+/*
         System.out.println("Hier");
         for (int i = 0; i < 9; i++) {
 
             System.out.println(testAll[0][i]);
         }
+
+ */
 
 
         // von array als 3x3-Matrix Form zu array als Zeile Form konvertieren
@@ -111,6 +113,7 @@ public class GererateSudoku {
 
         // Ergebnisse printen
 
+        /*
         for (int o = 0; o < 9; o++) {
             System.out.println("Zeile " + o);
             for (int i = 0; i < 9; i++) {
@@ -129,6 +132,8 @@ public class GererateSudoku {
                 System.out.println(testBoard[i][n]);
             }
         }
+
+         */
 
 
     }

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -17,9 +18,11 @@ public class Main {
 
 
      */
+    public static SudokuBoard board;
 
     static ArrayList<int[]> allMatrices = new ArrayList<>();
     static ArrayList<String> xyGlobalFalsch = new ArrayList<>();
+    static ArrayList<ArrayList<String>> xyGlobalCause = new ArrayList<>();
     static int mistakes = 0;
     static int mistakesMax = 0;
     static int wins = 0;
@@ -29,8 +32,8 @@ public class Main {
     static long startTime = 0;
 
     static String difficulty;
-
 /*
+
     static int[] Matrix1 = { 1,  2,  3,  4,  5,  6,  7,  8,  9};
     static int[] Matrix2 = {10, 11, 12, 13, 14, 15, 16, 17, 18};
     static int[] Matrix3 = {19, 20, 21, 22, 23, 24, 25, 26, 27};
@@ -60,6 +63,35 @@ public class Main {
 
 
     public static void main(String[] args) {
+
+        int[] matrix1 = {1,  2,  3,  2,  3,  4,  3,  4,  5};
+        System.arraycopy(matrix1, 0, Matrix1, 0, 9);
+
+        int[] matrix2 = {4,  5,  6,  5,  6,  7,  6,  7,  8};
+        System.arraycopy(matrix2, 0, Matrix2, 0, 9);
+
+        int[] matrix3 = {7,  8,  9,  8,  9,  1,  9,  1,  2};
+        System.arraycopy(matrix3, 0, Matrix3, 0, 9);
+
+        int[] matrix4 = {4,  5,  6,  5,  6,  7,  6,  7,  8};
+        System.arraycopy(matrix4, 0, Matrix4, 0, 9);
+
+        int[] matrix5 = {7,  8,  9,  8,  9,  1,  9,  1,  2};
+        System.arraycopy(matrix5, 0, Matrix5, 0, 9);
+
+        int[] matrix6 = {1,  2,  3,  2,  3,  4,  3,  4,  5};
+        System.arraycopy(matrix6, 0, Matrix6, 0, 9);
+
+        int[] matrix7 = {7,  8,  9,  8,  9,  1,  9,  1,  2};
+        System.arraycopy(matrix7, 0, Matrix7, 0, 9);
+
+        int[] matrix8 = {1,  2,  3,  2,  3,  4,  3,  4,  5};
+        System.arraycopy(matrix8, 0, Matrix8, 0, 9);
+
+        int[] matrix9 = {4,  5,  6,  5,  6,  7,  6,  7,  8};
+        System.arraycopy(matrix9, 0, Matrix9, 0, 9);
+
+        board = new SudokuBoard();
 
         GererateSudoku.fillArray();
 
@@ -243,7 +275,7 @@ public class Main {
 
 
         // Build the board with the sub matrices
-        SudokuBoard board = SudokuBoard.getInstance();
+        //SudokuBoard board = SudokuBoard.getInstance();
         board.add(m1);
         board.add(m2);
         board.add(m3);
@@ -302,7 +334,7 @@ public class Main {
             }
 
             if (min != 0) {
-                replaceRandom(min, max);
+                replaceRandom(min, max, setSeed());
                 break;
             }
         }
@@ -311,7 +343,7 @@ public class Main {
     public static void setGameOverCondition() {
         System.out.println();
         System.out.println("Nach wie vielen Fehlern soll das Spiel beendet werden?");
-        System.out.println("0 - Spiel nicht beenden, >= 1 - Spiel nach einem/mehreren Fehler/n beenden");
+        System.out.println("0 - Spiel nicht beenden, >= 1 - Spiel nach einem oder mehreren Fehlern beenden");
 
         String input;
 
@@ -338,13 +370,56 @@ public class Main {
         }
     }
 
-    public static void replaceRandom(int min, int max) {
+    public static int setSeed() {
+        System.out.println();
+        System.out.println("Soll ein bestimmter Seed benutzt werden? (0 = zufälliger Seed | > 0 = Seed)");
+
+        int seed;
+
+        String input;
+
+        Scanner userInput = new Scanner(System.in);
+
+        input = userInput.nextLine();
+
+        while (true) {
+            try {
+                if (Integer.parseInt(input) == 0) {
+                    seed = (int)Math.floor(Math.random()*(1000000 +1)+0);
+                    System.out.println("Ein zufälliger Seed wird benutzt");
+                    System.out.println(seed + " wird als Seed benutzt");
+                    return seed;
+                }
+
+                if (Integer.parseInt(input) > 0) {
+                    System.out.println(Integer.parseInt(input) + " wird als Seed benutzt");
+                    seed = Integer.parseInt(input);
+                    return seed;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Nur Zahlen eingeben");
+            }
+        }
+    }
+
+    public static void replaceRandom(int min, int max, int seed) {
+
+        Random random = new Random();
+
+        int randomNum;
+
         for (int i = 0; i < 9; i++) {
 
-            int randomNum = (int)Math.floor(Math.random()*(max - min +1)+ min);
+            random.setSeed(seed);
+
+            randomNum = random.nextInt(max - min) + min;
+
+            int randomIndex;
 
             for (int o = 0; o < randomNum; o++) {
-                int randomIndex = (int)Math.floor(Math.random()*(8 +1)+0);
+
+                randomIndex = random.nextInt(8);
+                seed ++;
                 allMatrices.get(i)[randomIndex] = 0;
             }
         }
@@ -355,7 +430,7 @@ public class Main {
         int zeile = 0;
         int runZahler = 0;
 
-        SudokuBoard board = SudokuBoard.getInstance();
+        //SudokuBoard board = SudokuBoard.getInstance();
 
         if (mistakesMax == 0) {
             System.out.println("Fehler: " + mistakes + " (keine Grenze)" + " | " + "Schweregrad: " + difficulty);
@@ -406,6 +481,9 @@ public class Main {
                 } else if (board.get(array).getCell(zeile, n).isChangeable()) {
                     System.out.print((char) 27 + "[33m" + board.get(array).getCell(zeile, n).getValue());
                     System.out.print((char) 27 + "[0m ");
+                } else if (board.get(array).getCell(zeile, n).isCause()) {
+                    System.out.print((char) 27 + "[90m" + board.get(array).getCell(zeile, n).getValue());
+                    System.out.print((char) 27 + "[0m ");
                 } else {
                     System.out.print(board.get(array).getCell(zeile, n).getValue());
                     System.out.print(" ");
@@ -425,7 +503,7 @@ public class Main {
     public static void benutzerinteraktion() {
         String input;
 
-        SudokuBoard board = SudokuBoard.getInstance();
+        //SudokuBoard board = SudokuBoard.getInstance();
 
         int xWertGlobal = 0;
         int yWertGlobal = 0;
@@ -447,6 +525,7 @@ public class Main {
                     lastGameTime = (endTime - startTime) / 60000;
                     System.out.println("Benötigte Zeit: " + lastGameTime + " min");
                     String[] args = {};
+                    board = null;
                     main(args);
                 } else {
                     for (int i = 0; i < 9; i++) {
@@ -458,7 +537,9 @@ public class Main {
                                     lastGameTime = (endTime - startTime) / 60000;
                                     System.out.println("Benötigte Zeit: " + lastGameTime + " min");
                                     String[] args = {};
+                                    board = null;
                                     main(args);
+
                                 }
                             }
                         }
@@ -468,6 +549,7 @@ public class Main {
                     long endTime = System.currentTimeMillis();
                     lastWonGameTime = (endTime - startTime) / 60000;
                     System.out.println("Benötigte Zeit: " + lastWonGameTime + " min");
+                    board = null;
                     String[] args = {};
                     main(args);
                 }
@@ -476,6 +558,8 @@ public class Main {
             if (input.length() > 1) {
                 System.out.println("Nur einen Buchstaben eingeben");
             }
+
+            input = input.toUpperCase();
 
             switch (input) {
                 case "A" -> xWertGlobal = 1;
@@ -598,7 +682,7 @@ public class Main {
 
         input = userInput.nextLine();
 
-        SudokuBoard board = SudokuBoard.getInstance();
+        //SudokuBoard board = SudokuBoard.getInstance();
 
         while (true) {
             if (!input.isEmpty()) {
@@ -627,7 +711,9 @@ public class Main {
 
         // zuerst prüfen, ob Eingabe nicht schon in der Matrix existiert / first, test if input does not already exist in sub matrix
 
-        SudokuBoard board = SudokuBoard.getInstance();
+        //SudokuBoard board = SudokuBoard.getInstance();
+
+        xyGlobalCause.add(new ArrayList<String>());
 
         boolean fehler = false;
 
@@ -638,6 +724,8 @@ public class Main {
                     if (!((xWertLokal - 1) == n && (yWertLokal - 1) == i)) { // Ausschließen, dass die Eingabe mit sich selbst verglichen wurde / Exclude, that input is not compared to itself
                         // Zwei gleiche Zahlen in der Matrix wurden gefunden / Two equal numbers where found in the sub matrix
                         fehler = true;
+                        board.get((matrixIndex - 1)).getCell(i, n).setCause(true);
+                        xyGlobalCause.get(xyGlobalCause.size()-1).add(String.valueOf(matrixIndex) + yWertLokal + xWertLokal + i + n + 0);
                         board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(true);
                         if (!xyGlobalFalsch.contains(String.valueOf(matrixIndex) + yWertLokal + xWertLokal)) {
                             xyGlobalFalsch.add(String.valueOf(matrixIndex) + yWertLokal + xWertLokal);
@@ -721,6 +809,8 @@ public class Main {
             for (int n = 0; n < 3; n++) {
                 if (Objects.equals(board.get((xprufen[i] - 1)).getCell((yWertLokal - 1), n).getValue(), board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).getValue())) {
                     fehler = true;
+                    board.get((xprufen[i] - 1)).getCell((yWertLokal - 1), n).setCause(true);
+                    xyGlobalCause.get(xyGlobalCause.size()-1).add(String.valueOf(matrixIndex) + yWertLokal + xWertLokal + xprufen[i] + n + 1);
                     board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(true);
                     if (!xyGlobalFalsch.contains(String.valueOf(matrixIndex) + yWertLokal + xWertLokal)) {
                         xyGlobalFalsch.add(String.valueOf(matrixIndex) + yWertLokal + xWertLokal);
@@ -737,6 +827,8 @@ public class Main {
             for (int n = 0; n < 3; n++) {
                 if (Objects.equals(board.get((yprufen[i] - 1)).getCell(n, (xWertLokal - 1)).getValue(), board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).getValue())) {
                     fehler = true;
+                    board.get((yprufen[i] - 1)).getCell(n, (xWertLokal - 1)).setCause(true);
+                    xyGlobalCause.get(xyGlobalCause.size()-1).add(String.valueOf(matrixIndex) + yWertLokal + xWertLokal + yprufen[i] + n + 2);
                     board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(true);
                     if (!xyGlobalFalsch.contains(String.valueOf(matrixIndex) + yWertLokal + xWertLokal)) {
                         xyGlobalFalsch.add(String.valueOf(matrixIndex) + yWertLokal + xWertLokal);
@@ -753,6 +845,39 @@ public class Main {
             if (xyGlobalFalsch.contains(String.valueOf(matrixIndex) + yWertLokal + xWertLokal)) {
                 xyGlobalFalsch.remove(String.valueOf(matrixIndex) + yWertLokal + xWertLokal);
                 board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(false);
+                // Delete cause for wrong cell
+                for (ArrayList<String> strings : xyGlobalCause) {
+                    if (strings.contains(String.valueOf(matrixIndex) + yWertLokal + xWertLokal)) {
+                        int mI = Integer.parseInt(String.valueOf(strings.get(0).charAt(0)));
+                        int x = Integer.parseInt(String.valueOf(strings.get(0).charAt(2)));
+                        int y = Integer.parseInt(String.valueOf(strings.get(0).charAt(1)));
+                        if (mI == matrixIndex && x == xWertLokal && y == yWertLokal) {
+                            if(Integer.parseInt(String.valueOf(strings.get(0).charAt(5))) == 0) {
+                                // Delete cause for wrong cell - sub matrix
+                                int lmI = Integer.parseInt(String.valueOf(strings.get(0).charAt(0)));
+                                int li = Integer.parseInt(String.valueOf(strings.get(0).charAt(3)));
+                                int ln = Integer.parseInt(String.valueOf(strings.get(0).charAt(4)));
+                                board.get((lmI - 1)).getCell(li, ln).setCause(false);
+                            }
+                            if (Integer.parseInt(String.valueOf(strings.get(0).charAt(5))) == 1 || Integer.parseInt(String.valueOf(strings.get(1).charAt(5))) == 1) {
+                                // Delete cause for wrong cell - x-Axis
+                                int lxp = Integer.parseInt(String.valueOf(strings.get(1).charAt(3)));
+                                int ly = Integer.parseInt(String.valueOf(strings.get(1).charAt(1)));
+                                int ln1 = Integer.parseInt(String.valueOf(strings.get(1).charAt(4)));
+                                board.get((lxp - 1)).getCell((ly - 1), ln1).setCause(false);
+                            }
+
+                            if (Integer.parseInt(String.valueOf(strings.get(0).charAt(5))) == 2 || Integer.parseInt(String.valueOf(strings.get(1).charAt(5))) == 2 || Integer.parseInt(String.valueOf(strings.get(2).charAt(5))) == 2) {
+                                // Delete cause for wrong cell - y-Axis
+                                int lyp = Integer.parseInt(String.valueOf(strings.get(1).charAt(3)));
+                                int lx = Integer.parseInt(String.valueOf(strings.get(1).charAt(2)));
+                                int ln2 = Integer.parseInt(String.valueOf(strings.get(1).charAt(4)));
+                                board.get((lyp - 1)).getCell(ln2, (lx - 1)).setCause(false);
+                            }
+                        }
+                    }
+                }
+
                 System.out.println("Fehler behoben");
             }
         } else {
