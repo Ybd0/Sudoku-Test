@@ -418,7 +418,7 @@ public class Main {
 
             for (int o = 0; o < randomNum; o++) {
 
-                randomIndex = random.nextInt(8);
+                randomIndex = random.nextInt(9);
                 seed ++;
                 allMatrices.get(i)[randomIndex] = 0;
             }
@@ -522,8 +522,8 @@ public class Main {
                 if (xyGlobalFalsch.size() > 0) {
                     System.out.println("Das Sudoku wurde mit Fehlern beendet");
                     long endTime = System.currentTimeMillis();
-                    lastGameTime = (endTime - startTime) / 60000;
-                    System.out.println("Benötigte Zeit: " + lastGameTime + " min");
+                    lastGameTime = (endTime - startTime);
+                    System.out.println("Benötigte Zeit: " + (lastGameTime  / 60000) + " min" + " : " + ((lastGameTime / 60000 * 60) - (lastGameTime  / 1000)) + " sek");
                     String[] args = {};
                     board = null;
                     main(args);
@@ -534,8 +534,8 @@ public class Main {
                                 if (board.get(i).getCell(y, x).getValue() == 0) {
                                     System.out.println("Das Sudoku wurde nicht vollständig ausgefüllt");
                                     long endTime = System.currentTimeMillis();
-                                    lastGameTime = (endTime - startTime) / 60000;
-                                    System.out.println("Benötigte Zeit: " + lastGameTime + " min");
+                                    lastGameTime = (endTime - startTime);
+                                    System.out.println("Benötigte Zeit: " + (lastGameTime  / 60000) + " min" + " : " + ((lastGameTime / 60000 * 60) - (lastGameTime  / 1000)) + " sek");
                                     String[] args = {};
                                     board = null;
                                     main(args);
@@ -547,8 +547,8 @@ public class Main {
                     System.out.println("Das Sudoku wurde ohne Fehler beendet");
                     wins ++;
                     long endTime = System.currentTimeMillis();
-                    lastWonGameTime = (endTime - startTime) / 60000;
-                    System.out.println("Benötigte Zeit: " + lastWonGameTime + " min");
+                    lastGameTime = (endTime - startTime);
+                    System.out.println("Benötigte Zeit: " + (lastGameTime  / 60000) + " min" + " : " + ((lastGameTime / 60000 * 60) - (lastGameTime  / 1000)) + " sek");
                     board = null;
                     String[] args = {};
                     main(args);
@@ -846,71 +846,67 @@ public class Main {
                 xyGlobalFalsch.remove(String.valueOf(matrixIndex) + yWertLokal + xWertLokal);
                 board.get((matrixIndex - 1)).getCell((yWertLokal - 1), (xWertLokal - 1)).setWrong(false);
                 // Delete cause for wrong cell
-                for (int i = 0; i < xyGlobalCause.size(); i++) {
-                    if (xyGlobalCause.get(i).size() > 0) {
-                        int mI = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(0).charAt(0)));
-                        int x = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(0).charAt(2)));
-                        int y = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(0).charAt(1)));
+                for (ArrayList<String> strings : xyGlobalCause) {
+                    if (strings.size() > 0) {
+                        int mI = Integer.parseInt(String.valueOf(strings.get(0).charAt(0)));
+                        int x = Integer.parseInt(String.valueOf(strings.get(0).charAt(2)));
+                        int y = Integer.parseInt(String.valueOf(strings.get(0).charAt(1)));
                         if (mI == matrixIndex && x == xWertLokal && y == yWertLokal) {
-                            if(Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(0).charAt(5))) == 0) {
+                            if (Integer.parseInt(String.valueOf(strings.get(0).charAt(5))) == 0) {
                                 // Delete cause for wrong cell - sub matrix
-                                int lmI = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(0).charAt(0)));
-                                int li = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(0).charAt(3)));
-                                int ln = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(0).charAt(4)));
+                                int lmI = Integer.parseInt(String.valueOf(strings.get(0).charAt(0)));
+                                int li = Integer.parseInt(String.valueOf(strings.get(0).charAt(3)));
+                                int ln = Integer.parseInt(String.valueOf(strings.get(0).charAt(4)));
                                 board.get((lmI - 1)).getCell(li, ln).setCause(false);
-                                System.out.println("A");
                             }
-                            if (Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(0).charAt(5))) == 1) {
+                            if (Integer.parseInt(String.valueOf(strings.get(0).charAt(5))) == 1) {
                                 // Delete cause for wrong cell - x-Axis
-                                int lxp = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(0).charAt(3)));
-                                int ly = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(0).charAt(1)));
-                                int ln1 = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(0).charAt(4)));
+                                int lxp = Integer.parseInt(String.valueOf(strings.get(0).charAt(3)));
+                                int ly = Integer.parseInt(String.valueOf(strings.get(0).charAt(1)));
+                                int ln1 = Integer.parseInt(String.valueOf(strings.get(0).charAt(4)));
                                 board.get((lxp - 1)).getCell((ly - 1), ln1).setCause(false);
-                                System.out.println("B");
                             }
 
-                            if (xyGlobalCause.get(i).size() > 1) {
-                                if (Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(1).charAt(5))) == 1) {
+                            if (strings.size() > 1) {
+                                if (Integer.parseInt(String.valueOf(strings.get(1).charAt(5))) == 1) {
                                     // Delete cause for wrong cell - x-Axis
-                                    int lxp = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(1).charAt(3)));
-                                    int ly = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(1).charAt(1)));
-                                    int ln1 = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(1).charAt(4)));
+                                    int lxp = Integer.parseInt(String.valueOf(strings.get(1).charAt(3)));
+                                    int ly = Integer.parseInt(String.valueOf(strings.get(1).charAt(1)));
+                                    int ln1 = Integer.parseInt(String.valueOf(strings.get(1).charAt(4)));
                                     board.get((lxp - 1)).getCell((ly - 1), ln1).setCause(false);
-                                    System.out.println("c");
                                 }
                             }
 
 
-                            if (Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(0).charAt(5))) == 2) {
+                            if (Integer.parseInt(String.valueOf(strings.get(0).charAt(5))) == 2) {
                                 // Delete cause for wrong cell - y-Axis
-                                int lyp = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(0).charAt(3)));
-                                int lx = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(0).charAt(2)));
-                                int ln2 = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(0).charAt(4)));
+                                int lyp = Integer.parseInt(String.valueOf(strings.get(0).charAt(3)));
+                                int lx = Integer.parseInt(String.valueOf(strings.get(0).charAt(2)));
+                                int ln2 = Integer.parseInt(String.valueOf(strings.get(0).charAt(4)));
                                 board.get((lyp - 1)).getCell(ln2, (lx - 1)).setCause(false);
-                                System.out.println("D");
                             }
 
-                            if (xyGlobalCause.get(i).size() > 1) {
-                                if (Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(1).charAt(5))) == 2) {
+                            if (strings.size() > 1) {
+                                if (Integer.parseInt(String.valueOf(strings.get(1).charAt(5))) == 2) {
                                     // Delete cause for wrong cell - y-Axis
-                                    int lyp = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(1).charAt(3)));
-                                    int lx = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(1).charAt(2)));
-                                    int ln2 = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(1).charAt(4)));
+                                    int lyp = Integer.parseInt(String.valueOf(strings.get(1).charAt(3)));
+                                    int lx = Integer.parseInt(String.valueOf(strings.get(1).charAt(2)));
+                                    int ln2 = Integer.parseInt(String.valueOf(strings.get(1).charAt(4)));
                                     board.get((lyp - 1)).getCell(ln2, (lx - 1)).setCause(false);
-                                    System.out.println("E");
                                 }
                             }
 
-                            if (xyGlobalCause.get(i).size() > 2) {
-                                if (Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(2).charAt(5))) == 2) {
+                            if (strings.size() > 2) {
+                                if (Integer.parseInt(String.valueOf(strings.get(2).charAt(5))) == 2) {
                                     // Delete cause for wrong cell - y-Axis
-                                    int lyp = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(2).charAt(3)));
-                                    int lx = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(2).charAt(2)));
-                                    int ln2 = Integer.parseInt(String.valueOf(xyGlobalCause.get(i).get(2).charAt(4)));
+                                    int lyp = Integer.parseInt(String.valueOf(strings.get(2).charAt(3)));
+                                    int lx = Integer.parseInt(String.valueOf(strings.get(2).charAt(2)));
+                                    int ln2 = Integer.parseInt(String.valueOf(strings.get(2).charAt(4)));
                                     board.get((lyp - 1)).getCell(ln2, (lx - 1)).setCause(false);
-                                    System.out.println("F");
                                 }
                             }
+
+                            strings.clear();
                         }
                     }
                 }
