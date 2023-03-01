@@ -115,6 +115,8 @@ public class Main {
 
         Matrix m9 = new Matrix();
 
+        Matrix m10 = new Matrix();
+
         // must replace random numbers in arrays before they are being added
 
         allMatrices.add(Matrix1);
@@ -272,6 +274,11 @@ public class Main {
             add(new Cell(Matrix9[7]));
             add(new Cell(Matrix9[8]));
         }});
+
+        m10.init(new int[][]{
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}});
 
 
         // Build the board with the sub matrices
