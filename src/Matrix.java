@@ -10,6 +10,7 @@ public class Matrix extends ArrayList<ArrayList<Cell>>{
         return this.get(row).get(col);
     }
 
+    /*
 
     protected void print(final int index) {
         System.out.println("Sub Matrix " + index + ": ");
@@ -63,4 +64,6 @@ public class Matrix extends ArrayList<ArrayList<Cell>>{
             }
         }
     }
+
+     */
 }

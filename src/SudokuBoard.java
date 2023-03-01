@@ -4,15 +4,11 @@ public class SudokuBoard extends ArrayList<Matrix> {
 
     // implement Singleton Pattern
 
-    private static final SudokuBoard board = new SudokuBoard();
-
-    public static SudokuBoard getInstance() {
-        return board;
-    }
-
     public SudokuBoard() {
         super();
     }
+
+    /*
 
     public void print() {
         System.out.println("Sudoku Board");
@@ -112,5 +108,7 @@ public class SudokuBoard extends ArrayList<Matrix> {
     public void printSubMatrix(final int index){
         this.get(index).print(index);
     }
+
+     */
 
 }
