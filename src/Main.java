@@ -115,6 +115,8 @@ public class Main {
 
         Matrix m9 = new Matrix();
 
+        Matrix m10 = new Matrix();
+
         // must replace random numbers in arrays before they are being added
 
         allMatrices.add(Matrix1);
@@ -272,6 +274,11 @@ public class Main {
             add(new Cell(Matrix9[7]));
             add(new Cell(Matrix9[8]));
         }});
+
+        m10.init(new int[][]{
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}});
 
 
         // Build the board with the sub matrices
@@ -472,20 +479,26 @@ public class Main {
                     System.out.print("| ");
                 }
 
-                if (board.get(array).getCell(zeile, n).getValue() == 0) {
+                Cell currentCell = board.get(array).getCell(zeile, n);
+
+                if (currentCell.getValue() == 0) {
                     System.out.print((char) 27 + "[34m?");
                     System.out.print((char) 27 + "[0m ");
-                } else if (board.get(array).getCell(zeile, n).isWrong()) {
-                    System.out.print((char) 27 + "[31m" + board.get(array).getCell(zeile, n).getValue());
+
+                } else if (currentCell.isWrong()) {
+                    System.out.print((char) 27 + "[31m" + currentCell.getValue());
                     System.out.print((char) 27 + "[0m ");
-                } else if (board.get(array).getCell(zeile, n).isChangeable()) {
-                    System.out.print((char) 27 + "[33m" + board.get(array).getCell(zeile, n).getValue());
+
+                } else if (currentCell.isChangeable()) {
+                    System.out.print((char) 27 + "[33m" + currentCell.getValue());
                     System.out.print((char) 27 + "[0m ");
-                } else if (board.get(array).getCell(zeile, n).isCause()) {
+
+                } else if (currentCell.isCause()) {
                     System.out.print((char) 27 + "[90m" + board.get(array).getCell(zeile, n).getValue());
                     System.out.print((char) 27 + "[0m ");
+
                 } else {
-                    System.out.print(board.get(array).getCell(zeile, n).getValue());
+                    System.out.print(currentCell.getValue());
                     System.out.print(" ");
                 }
 
@@ -571,7 +584,7 @@ public class Main {
                 case "G" -> xWertGlobal = 7;
                 case "H" -> xWertGlobal = 8;
                 case "I" -> xWertGlobal = 9;
-                default -> System.out.println("Nur einen Großbuchstaben von A - I eingeben");
+                default -> System.out.println("Bitte nur einen Buchstaben von A - I eingeben.");
             }
 
         }

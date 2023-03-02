@@ -10,6 +10,21 @@ public class Matrix extends ArrayList<ArrayList<Cell>>{
         return this.get(row).get(col);
     }
 
+
+
+    /** This methode allows you to initialize a Matrix object with a two-dimensional int array.*/
+    public void init(int[][] mat){
+        for(int[] currentIntArray : mat) {
+            ArrayList<Cell> test = new ArrayList<>() {{
+                add(new Cell(currentIntArray[0]));
+                add(new Cell(currentIntArray[1]));
+                add(new Cell(currentIntArray[2]));
+            }};
+
+            this.add(test);
+        }
+    }
+
     /*
 
     protected void print(final int index) {
