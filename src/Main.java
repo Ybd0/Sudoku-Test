@@ -98,24 +98,14 @@ public class Main {
         System.out.println();
 
         Matrix m1 = new Matrix();
-
         Matrix m2 = new Matrix();
-
         Matrix m3 = new Matrix();
-
         Matrix m4 = new Matrix();
-
         Matrix m5 = new Matrix();
-
         Matrix m6 = new Matrix();
-
         Matrix m7 = new Matrix();
-
         Matrix m8 = new Matrix();
-
         Matrix m9 = new Matrix();
-
-        Matrix m10 = new Matrix();
 
         // must replace random numbers in arrays before they are being added
 
@@ -133,152 +123,50 @@ public class Main {
 
         setGameOverCondition();
 
-        m1.add(new ArrayList<>(){{
-            add(new Cell(Matrix1[0]));
-            add(new Cell(Matrix1[1]));
-            add(new Cell(Matrix1[2]));
-        }});
-        m1.add(new ArrayList<>(){{
-            add(new Cell(Matrix1[3]));
-            add(new Cell(Matrix1[4]));
-            add(new Cell(Matrix1[5]));
-        }});
-        m1.add(new ArrayList<>(){{
-            add(new Cell(Matrix1[6]));
-            add(new Cell(Matrix1[7]));
-            add(new Cell(Matrix1[8]));
-        }});
+        m1.init(new int[][]{
+                {Matrix1[0], Matrix1[1], Matrix1[2]},
+                {Matrix1[3], Matrix1[4], Matrix1[5]},
+                {Matrix1[6], Matrix1[7], Matrix1[8]}});
 
-        m2.add(new ArrayList<>(){{
-            add(new Cell(Matrix2[0]));
-            add(new Cell(Matrix2[1]));
-            add(new Cell(Matrix2[2]));
-        }});
-        m2.add(new ArrayList<>(){{
-            add(new Cell(Matrix2[3]));
-            add(new Cell(Matrix2[4]));
-            add(new Cell(Matrix2[5]));
-        }});
-        m2.add(new ArrayList<>(){{
-            add(new Cell(Matrix2[6]));
-            add(new Cell(Matrix2[7]));
-            add(new Cell(Matrix2[8]));
-        }});
+        m2.init(new int[][]{
+                {Matrix2[0], Matrix2[1], Matrix2[2]},
+                {Matrix2[3], Matrix2[4], Matrix2[5]},
+                {Matrix2[6], Matrix2[7], Matrix2[8]}});
 
-        m3.add(new ArrayList<>(){{
-            add(new Cell(Matrix3[0]));
-            add(new Cell(Matrix3[1]));
-            add(new Cell(Matrix3[2]));
-        }});
-        m3.add(new ArrayList<>(){{
-            add(new Cell(Matrix3[3]));
-            add(new Cell(Matrix3[4]));
-            add(new Cell(Matrix3[5]));
-        }});
-        m3.add(new ArrayList<>(){{
-            add(new Cell(Matrix3[6]));
-            add(new Cell(Matrix3[7]));
-            add(new Cell(Matrix3[8]));
-        }});
+        m3.init(new int[][]{
+                {Matrix3[0], Matrix3[1], Matrix3[2]},
+                {Matrix3[3], Matrix3[4], Matrix3[5]},
+                {Matrix3[6], Matrix3[7], Matrix3[8]}});
 
-        m4.add(new ArrayList<>(){{
-            add(new Cell(Matrix4[0]));
-            add(new Cell(Matrix4[1]));
-            add(new Cell(Matrix4[2]));
-        }});
-        m4.add(new ArrayList<>(){{
-            add(new Cell(Matrix4[3]));
-            add(new Cell(Matrix4[4]));
-            add(new Cell(Matrix4[5]));
-        }});
-        m4.add(new ArrayList<>(){{
-            add(new Cell(Matrix4[6]));
-            add(new Cell(Matrix4[7]));
-            add(new Cell(Matrix4[8]));
-        }});
+        m4.init(new int[][]{
+                {Matrix4[0], Matrix4[1], Matrix4[2]},
+                {Matrix4[3], Matrix4[4], Matrix4[5]},
+                {Matrix4[6], Matrix4[7], Matrix4[8]}});
 
-        m5.add(new ArrayList<>(){{
-            add(new Cell(Matrix5[0]));
-            add(new Cell(Matrix5[1]));
-            add(new Cell(Matrix5[2]));
-        }});
-        m5.add(new ArrayList<>(){{
-            add(new Cell(Matrix5[3]));
-            add(new Cell(Matrix5[4]));
-            add(new Cell(Matrix5[5]));
-        }});
-        m5.add(new ArrayList<>(){{
-            add(new Cell(Matrix5[6]));
-            add(new Cell(Matrix5[7]));
-            add(new Cell(Matrix5[8]));
-        }});
+        m5.init(new int[][]{
+                {Matrix5[0], Matrix5[1], Matrix5[2]},
+                {Matrix5[3], Matrix5[4], Matrix5[5]},
+                {Matrix5[6], Matrix5[7], Matrix5[8]}});
 
-        m6.add(new ArrayList<>(){{
-            add(new Cell(Matrix6[0]));
-            add(new Cell(Matrix6[1]));
-            add(new Cell(Matrix6[2]));
-        }});
-        m6.add(new ArrayList<>(){{
-            add(new Cell(Matrix6[3]));
-            add(new Cell(Matrix6[4]));
-            add(new Cell(Matrix6[5]));
-        }});
-        m6.add(new ArrayList<>(){{
-            add(new Cell(Matrix6[6]));
-            add(new Cell(Matrix6[7]));
-            add(new Cell(Matrix6[8]));
-        }});
+        m6.init(new int[][]{
+                {Matrix6[0], Matrix6[1], Matrix6[2]},
+                {Matrix6[3], Matrix6[4], Matrix6[5]},
+                {Matrix6[6], Matrix6[7], Matrix6[8]}});
 
-        m7.add(new ArrayList<>(){{
-            add(new Cell(Matrix7[0]));
-            add(new Cell(Matrix7[1]));
-            add(new Cell(Matrix7[2]));
-        }});
-        m7.add(new ArrayList<>(){{
-            add(new Cell(Matrix7[3]));
-            add(new Cell(Matrix7[4]));
-            add(new Cell(Matrix7[5]));
-        }});
-        m7.add(new ArrayList<>(){{
-            add(new Cell(Matrix7[6]));
-            add(new Cell(Matrix7[7]));
-            add(new Cell(Matrix7[8]));
-        }});
-        m8.add(new ArrayList<>(){{
-            add(new Cell(Matrix8[0]));
-            add(new Cell(Matrix8[1]));
-            add(new Cell(Matrix8[2]));
-        }});
-        m8.add(new ArrayList<>(){{
-            add(new Cell(Matrix8[3]));
-            add(new Cell(Matrix8[4]));
-            add(new Cell(Matrix8[5]));
-        }});
-        m8.add(new ArrayList<>(){{
-            add(new Cell(Matrix8[6]));
-            add(new Cell(Matrix8[7]));
-            add(new Cell(Matrix8[8]));
-        }});
-        m9.add(new ArrayList<>(){{
-            add(new Cell(Matrix9[0]));
-            add(new Cell(Matrix9[1]));
-            add(new Cell(Matrix9[2]));
-        }});
-        m9.add(new ArrayList<>(){{
-            add(new Cell(Matrix9[3]));
-            add(new Cell(Matrix9[4]));
-            add(new Cell(Matrix9[5]));
-        }});
-        m9.add(new ArrayList<>(){{
-            add(new Cell(Matrix9[6]));
-            add(new Cell(Matrix9[7]));
-            add(new Cell(Matrix9[8]));
-        }});
+        m7.init(new int[][]{
+                {Matrix7[0], Matrix7[1], Matrix7[2]},
+                {Matrix7[3], Matrix7[4], Matrix7[5]},
+                {Matrix7[6], Matrix7[7], Matrix7[8]}});
+        
+        m8.init(new int[][]{
+                {Matrix8[0], Matrix8[1], Matrix8[2]},
+                {Matrix8[3], Matrix8[4], Matrix8[5]},
+                {Matrix8[6], Matrix8[7], Matrix8[8]}});
 
-        m10.init(new int[][]{
-                {1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 9}});
+        m9.init(new int[][]{
+                {Matrix9[0], Matrix9[1], Matrix9[2]},
+                {Matrix9[3], Matrix9[4], Matrix9[5]},
+                {Matrix9[6], Matrix9[7], Matrix9[8]}});
 
 
         // Build the board with the sub matrices
@@ -293,11 +181,9 @@ public class Main {
         board.add(m8);
         board.add(m9);
 
-
-        printSudoku();
+        printSudoku(false);
 
         startTime = System.currentTimeMillis();
-
 
         benutzerinteraktion();
     }
@@ -320,17 +206,17 @@ public class Main {
             try {
                 switch (Integer.parseInt(input)) {
                     case 1 -> {
-                        min = 2;
-                        max = 5;
+                        min = 3;
+                        max = 6;
                         difficulty = "einfach";
                     }
                     case 2 -> {
-                        min = 4;
-                        max = 7;
+                        min = 5;
+                        max = 8;
                         difficulty = "mittel";
                     }
                     case 3 -> {
-                        min = 6;
+                        min = 7;
                         max = 9;
                         difficulty = "schwer";
                     }
@@ -432,7 +318,7 @@ public class Main {
         }
     }
 
-    private static void printSudoku() {
+    private static void printSudoku(boolean won) {
         int nrKM = 0; // Nummer an gezeichneten Zeilen von sub Matrizen / Number of printed rows from sub matrices
         int zeile = 0;
         int runZahler = 0;
@@ -490,11 +376,16 @@ public class Main {
                     System.out.print((char) 27 + "[0m ");
 
                 } else if (currentCell.isChangeable()) {
-                    System.out.print((char) 27 + "[33m" + currentCell.getValue());
-                    System.out.print((char) 27 + "[0m ");
+                    if (won) {
+                        System.out.print((char) 27 + "[92m" + currentCell.getValue());
+                        System.out.print((char) 27 + "[0m ");
+                    } else {
+                        System.out.print((char) 27 + "[33m" + currentCell.getValue());
+                        System.out.print((char) 27 + "[0m ");
+                    }
 
                 } else if (currentCell.isCause()) {
-                    System.out.print((char) 27 + "[90m" + board.get(array).getCell(zeile, n).getValue());
+                    System.out.print((char) 27 + "[90m" + currentCell.getValue());
                     System.out.print((char) 27 + "[0m ");
 
                 } else {
@@ -536,7 +427,7 @@ public class Main {
                     System.out.println("Das Sudoku wurde mit Fehlern beendet");
                     long endTime = System.currentTimeMillis();
                     lastGameTime = (endTime - startTime);
-                    System.out.println("Benötigte Zeit: " + (lastGameTime  / 60000) + " min" + " : " + ((lastGameTime / 60000 * 60) - (lastGameTime  / 1000)) + " sek");
+                    System.out.println("Benötigte Zeit: " + (lastGameTime  / 60000) + " min" + " : " + ((lastGameTime  / 1000) - (lastGameTime / 60000 * 60)) + " sek");
                     String[] args = {};
                     board = null;
                     main(args);
@@ -548,7 +439,7 @@ public class Main {
                                     System.out.println("Das Sudoku wurde nicht vollständig ausgefüllt");
                                     long endTime = System.currentTimeMillis();
                                     lastGameTime = (endTime - startTime);
-                                    System.out.println("Benötigte Zeit: " + (lastGameTime  / 60000) + " min" + " : " + ((lastGameTime / 60000 * 60) - (lastGameTime  / 1000)) + " sek");
+                                    System.out.println("Benötigte Zeit: " + (lastGameTime  / 60000) + " min" + " : " + ((lastGameTime  / 1000) - (lastGameTime / 60000 * 60)) + " sek");
                                     String[] args = {};
                                     board = null;
                                     main(args);
@@ -560,8 +451,8 @@ public class Main {
                     System.out.println("Das Sudoku wurde ohne Fehler beendet");
                     wins ++;
                     long endTime = System.currentTimeMillis();
-                    lastGameTime = (endTime - startTime);
-                    System.out.println("Benötigte Zeit: " + (lastGameTime  / 60000) + " min" + " : " + ((lastGameTime / 60000 * 60) - (lastGameTime  / 1000)) + " sek");
+                    lastWonGameTime = (endTime - startTime);
+                    System.out.println("Benötigte Zeit: " + (lastWonGameTime  / 60000) + " min" + " : " + ((lastWonGameTime  / 1000) - (lastWonGameTime / 60000 * 60)) + " sek");
                     board = null;
                     String[] args = {};
                     main(args);
@@ -726,7 +617,7 @@ public class Main {
 
         //SudokuBoard board = SudokuBoard.getInstance();
 
-        xyGlobalCause.add(new ArrayList<String>());
+        xyGlobalCause.add(new ArrayList<>());
 
         boolean fehler = false;
 
@@ -890,7 +781,6 @@ public class Main {
                                 }
                             }
 
-
                             if (Integer.parseInt(String.valueOf(strings.get(0).charAt(5))) == 2) {
                                 // Delete cause for wrong cell - y-Axis
                                 int lyp = Integer.parseInt(String.valueOf(strings.get(0).charAt(3)));
@@ -954,8 +844,35 @@ public class Main {
             }
         }
 
-        printSudoku();
+        for (int i = 0; i < 9; i++) {
+            for (int y = 0; y <3; y++) {
+                for (int x = 0; x < 3; x++) {
+                    if (board.get(i).getCell(y, x).getValue() == 0) {
 
-        benutzerinteraktion();
+                        printSudoku(false);
+
+                        benutzerinteraktion();
+                    }
+
+                }
+            }
+        }
+        if (xyGlobalFalsch.size() > 0) {
+            printSudoku(false);
+
+            benutzerinteraktion();
+        } else {
+            printSudoku(true);
+
+            System.out.println("Das Sudoku wurde ohne Fehler beendet");
+            wins++;
+            long endTime = System.currentTimeMillis();
+            lastWonGameTime = (endTime - startTime);
+            System.out.println("Benötigte Zeit: " + (lastWonGameTime / 60000) + " min" + " : " + ((lastWonGameTime / 1000) - (lastWonGameTime / 60000 * 60)) + " sek");
+            board = null;
+
+            String[] args = {};
+            main(args);
+        }
     }
 }
